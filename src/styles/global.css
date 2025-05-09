@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter";
+}
+
+@media (width < 40rem) {
+  .leaflet-control-attribution > *:not(:first-child) {
+    display: none !important;
+  }
+}
+
+.os-api-branding {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  display: block;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.os-api-branding.logo {
+  left: 0;
+  padding: 8px;
+  width: 90px;
+  height: 24px;
+  background-image: url(./img/os-logo-maps.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: content-box;
+}
+.os-api-branding.logo.white {
+  background-image: url(./img/os-logo-maps-white.svg);
+}

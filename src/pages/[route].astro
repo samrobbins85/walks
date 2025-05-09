@@ -1,0 +1,26 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Map from "../components/map";
+export async function getStaticPaths() {
+  const walks = await getCollection("walks");
+  const paths = await Promise.all(
+    walks.map(async (walk) => {
+      const geojsonEntry = await getEntry("walkGeoJSON", walk.data.geojson.id);
+
+      return {
+        params: { route: walk.data.slug },
+        props: { walk, geojsonEntry },
+      };
+    })
+  );
+  return paths;
+}
+const { walk, geojsonEntry } = Astro.props;
+---
+
+<Layout>
+  <h1 class="text-3xl font-semibold">{walk.data.title}</h1>
+  <h2>{walk.data.description}</h2>
+  <Map geoData={geojsonEntry.data} client:only />
+</Layout>
