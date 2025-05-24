@@ -1,10 +1,22 @@
 ---
+import { Image } from "astro:assets";
+import FormattedDate from "./common/FormattedDate.astro";
 const { walk } = Astro.props;
 ---
 
 <li>
   <a href={`/${walk.data.slug}`}>
-    <div class="h-32 bg-gray-100 rounded-lg"></div>
-    {walk.data.title}
+    <Image
+      src={walk.data.cover}
+      alt=""
+      class="h-40 object-cover rounded-lg mb-2"
+    />
+
+    <flex class="flex flex-col">
+      <span class="font-medium">{walk.data.title}</span>
+      <span class="text-sm text-gray-600">
+        <FormattedDate date={walk.data.date} />
+      </span>
+    </flex>
   </a>
 </li>

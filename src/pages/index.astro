@@ -8,6 +8,10 @@ const walks = await getCollection("walks");
 <Layout>
   <h1 class="text-3xl pt-5 font-semibold">My walks</h1>
   <ul class="grid grid-cols-4 gap-4 pt-8">
-    {walks.map((walk) => <WalkCard walk={walk} />)}
+    {
+      walks
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+        .map((walk) => <WalkCard walk={walk} />)
+    }
   </ul>
 </Layout>
