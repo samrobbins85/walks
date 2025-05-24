@@ -1,10 +1,13 @@
 ---
+import WalkCard from "../components/walkCard.astro";
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { getCollection } from "astro:content";
+const walks = await getCollection("walks");
 ---
 
 <Layout>
-  <h1 class="text-5xl text-center pt-5 font-semibold">Here are my walks</h1>
+  <h1 class="text-3xl pt-5 font-semibold">My walks</h1>
+  <ul class="grid grid-cols-4 gap-4 pt-8">
+    {walks.map((walk) => <WalkCard walk={walk} />)}
+  </ul>
 </Layout>

@@ -20,7 +20,9 @@ const { walk, geojsonEntry } = Astro.props;
 ---
 
 <Layout>
-  <h1 class="text-3xl font-semibold">{walk.data.title}</h1>
-  <h2>{walk.data.description}</h2>
+  <div class="py-6">
+    <h1 class="text-3xl font-bold">{walk.data.title}</h1>
+    <h2 class="text-gray-600 pt-2">{walk.data.description}</h2>
+  </div>
   <Map geoData={geojsonEntry.data} client:only />
 </Layout>

@@ -15,16 +15,17 @@ import FootPrints from "../assets/footprints.svg";
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
   <body>
-    <div
-      class="h-12 flex px-8 py-2 items-center bg-stone-100 text-xl justify-between"
+    <nav
+      class="h-12 flex px-8 py-2 items-center border-b border-gray-200 justify-between"
     >
-      <div class="flex gap-x-2 items-center font-medium">
-        <FootPrints class="text-stone-600" />
+      <a class="flex gap-x-2 items-center font-medium" href="/">
+        <FootPrints class="text-stone-600 size-6" />
         Sam's Walks
-      </div>
-      <div>Walks</div>
-    </div>
-    <slot />
+      </a>
+    </nav>
+    <main class="max-w-7xl mx-auto px-8">
+      <slot />
+    </main>
   </body>
 </html>
 

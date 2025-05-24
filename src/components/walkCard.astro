@@ -1,0 +1,10 @@
+---
+const { walk } = Astro.props;
+---
+
+<li>
+  <a href={`/${walk.data.slug}`}>
+    <div class="h-32 bg-gray-100 rounded-lg"></div>
+    {walk.data.title}
+  </a>
+</li>

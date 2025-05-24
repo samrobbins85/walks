@@ -40,7 +40,11 @@ export default function Map({ geoData }) {
 
   return (
     <div>
-      <div id="map" style={{ height: "400px", width: "100%" }}>
+      <div
+        id="map"
+        style={{ height: "400px", width: "100%" }}
+        className="rounded-lg"
+      >
         <div className="os-api-branding logo" />
       </div>
     </div>
