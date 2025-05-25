@@ -18,7 +18,10 @@ const walks = defineCollection({
 });
 
 const walkGeoJSON = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/data/walks" }),
+  loader: glob({
+    pattern: "**/*.json",
+    base: "./src/data/walks",
+  }),
 });
 
 export const collections = { walks, walkGeoJSON };
