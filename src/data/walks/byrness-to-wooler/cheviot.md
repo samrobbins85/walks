@@ -1,5 +1,5 @@
 ---
-title: "Cheviots walk"
+title: "Byrness to Wooler"
 description: "Walk along the border ridge"
 geojson: "byrness-to-wooler/map"
 slug: "byrness-wooler"
