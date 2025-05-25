@@ -31,7 +31,7 @@ export default function OverviewMap({ routes }) {
       const layer = L.geoJSON(route.geojson, {
         style: {
           color: getColor(index, routes.length),
-          weight: 2,
+          weight: 3,
         },
         onEachFeature: function (feature, layer) {
           // You can customize the tooltip text here
@@ -53,12 +53,11 @@ export default function OverviewMap({ routes }) {
 
       combinedBounds.extend(layer.getBounds());
     });
-
-    map.fitBounds(combinedBounds);
+    map.fitBounds(combinedBounds.pad(0.2));
     map.setMinZoom(map.getZoom());
     map.setMaxZoom(16);
 
-    map.setMaxBounds(combinedBounds);
+    map.setMaxBounds(combinedBounds.pad(0.2));
     return () => {
       map.remove();
     };
