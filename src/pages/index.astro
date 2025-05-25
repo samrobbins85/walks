@@ -1,12 +1,21 @@
 ---
+import OverviewMap from "../components/overviewMap";
 import WalkCard from "../components/walkCard.astro";
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 const walks = await getCollection("walks");
+const routes = await Promise.all(
+  walks.map(async (walk) => {
+    const geojsonEntry = await getEntry("walkGeoJSON", walk.data.geojson.id);
+
+    return { ...walk.data, geojson: geojsonEntry.data };
+  })
+);
 ---
 
 <Layout>
   <h1 class="text-3xl pt-5 font-semibold">My walks</h1>
+  <OverviewMap routes={routes} client:only />
   <ul class="grid grid-cols-4 gap-4 pt-8">
     {
       walks
