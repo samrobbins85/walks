@@ -15,7 +15,9 @@ const routes = await Promise.all(
 
 <Layout>
   <h1 class="text-3xl pt-5 font-semibold pb-4">My walks</h1>
-  <OverviewMap routes={routes} client:only />
+  <div class="h-[600px]">
+    <OverviewMap routes={routes} client:only />
+  </div>
   <ul class="grid grid-cols-4 gap-4 py-8">
     {
       walks
