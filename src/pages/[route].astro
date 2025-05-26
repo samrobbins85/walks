@@ -24,5 +24,7 @@ const { walk, geojsonEntry } = Astro.props;
     <h1 class="text-3xl font-bold">{walk.data.title}</h1>
     <h2 class="text-gray-600 pt-2">{walk.data.description}</h2>
   </div>
-  <Map geoData={geojsonEntry.data} client:only />
+  <div class="h-[400px]">
+    <Map geoData={geojsonEntry.data} client:only />
+  </div>
 </Layout>

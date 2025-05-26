@@ -18,7 +18,7 @@ const routes = await Promise.all(
   <div class="h-[600px]">
     <OverviewMap routes={routes} client:only />
   </div>
-  <ul class="grid grid-cols-4 gap-4 py-8">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
     {
       walks
         .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
