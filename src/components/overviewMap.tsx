@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { shuffle } from "../utils";
 
 function getColor(index, total) {
   const hue = (index / total) * 360;
@@ -22,12 +23,15 @@ export default function OverviewMap({ routes }) {
             new Date().getFullYear().toString()
           ),
         detectRetina: false,
+        minNativeZoom: 7,
+        minZoom: 6,
+        maxZoom: 16,
       }
     ).addTo(map);
 
     let combinedBounds = L.latLngBounds([]);
 
-    routes.forEach((route, index) => {
+    shuffle(routes).forEach((route, index) => {
       const layer = L.geoJSON(route.geojson, {
         style: {
           color: getColor(index, routes.length),
@@ -53,11 +57,13 @@ export default function OverviewMap({ routes }) {
 
       combinedBounds.extend(layer.getBounds());
     });
-    map.fitBounds(combinedBounds.pad(0.2));
-    map.setMinZoom(map.getZoom());
-    map.setMaxZoom(16);
-
+    const northumberlandBounds = L.latLngBounds(
+      [54.7054, -2.7612],
+      [55.8113, -1.3802]
+    );
     map.setMaxBounds(combinedBounds.pad(0.2));
+    map.fitBounds(northumberlandBounds);
+
     return () => {
       map.remove();
     };
