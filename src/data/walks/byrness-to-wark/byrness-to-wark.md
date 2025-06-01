@@ -4,5 +4,5 @@ description: "Walk along the Pennine Way"
 geojson: "byrness-to-wark/map"
 slug: "byrness-to-wark"
 cover: "./moor.jpg"
-date: 2025-08-10
+date: 2024-08-10
 ---
