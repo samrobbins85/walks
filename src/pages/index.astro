@@ -16,7 +16,7 @@ const routes = await Promise.all(
 <Layout>
   <h1 class="text-3xl pt-5 font-semibold pb-4">My walks</h1>
   <div class="h-[600px]">
-    <FullMap routes={JSON.stringify(routes)} />
+    <FullMap routes={routes} />
   </div>
   <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
     {
