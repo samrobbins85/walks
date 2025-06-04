@@ -10,7 +10,7 @@ const brewerColors = [
   "#666666",
 ];
 
-export function getGraphColouring(routes) {
+export function calculateGraphColouring(routes) {
   let adjacency = Object.fromEntries(routes.map((route) => [route.slug, []]));
   const colouring = Object.fromEntries(
     routes.map((route) => [route.slug, undefined])
@@ -47,4 +47,12 @@ export function getGraphColouring(routes) {
     }
   });
   return colouring;
+}
+
+let _cached = null;
+export function getGraphColouring(routes) {
+  if (!_cached) {
+    _cached = calculateGraphColouring(routes);
+  }
+  return _cached;
 }
