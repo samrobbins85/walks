@@ -1,19 +1,33 @@
 import * as turf from "@turf/turf";
 const brewerColors = [
-  "#1b9e77",
-  "#d95f02",
-  "#7570b3",
-  "#e7298a",
-  "#66a61e",
-  "#e6ab02",
-  "#a6761d",
-  "#666666",
+  "#7F3C8D",
+  "#11A579",
+  "#3969AC",
+  "#F2B701",
+  "#E73F74",
+  "#80BA5A",
+  "#E68310",
+  "#008695",
+  "#CF1C90",
+  "#f97b72",
+  "#4b4b8f",
+  "#A5AA99",
 ];
+
+const getColorFromNeighbours = (neighbourColours) => {
+  const unused = brewerColors.filter(
+    (colour) => !neighbourColours.includes(colour)
+  );
+  return unused[Math.floor(Math.random() * unused.length)];
+};
 
 export function calculateGraphColouring(routes) {
   let adjacency = Object.fromEntries(routes.map((route) => [route.slug, []]));
   const colouring = Object.fromEntries(
     routes.map((route) => [route.slug, undefined])
+  );
+  const colourCount = Object.fromEntries(
+    brewerColors.map((color) => [color, 0])
   );
   routes.forEach((focusRoute, index) => {
     const bufferedLine = turf.buffer(focusRoute.geojson, 3, {
@@ -30,21 +44,12 @@ export function calculateGraphColouring(routes) {
       }
     });
   });
-  adjacency = Object.entries(adjacency).sort(
-    ([_aKey, aValue], [_bKey, bValue]) => bValue.length - aValue.length
-  );
-  adjacency.forEach(([node, neighbours]) => {
-    if (neighbours.length === 0) {
-      colouring[node] =
-        brewerColors[Math.floor(Math.random() * brewerColors.length)];
-    } else {
-      const used_neighbour_colours = neighbours.map(
-        (neighbour) => colouring[neighbour]
-      );
-      colouring[node] = brewerColors.find(
-        (color) => !used_neighbour_colours.includes(color)
-      );
-    }
+
+  Object.entries(adjacency).forEach(([node, neighbours]) => {
+    const used_neighbour_colours = neighbours.map(
+      (neighbour) => colouring[neighbour]
+    );
+    colouring[node] = getColorFromNeighbours(used_neighbour_colours);
   });
   return colouring;
 }
