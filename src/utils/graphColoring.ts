@@ -11,7 +11,6 @@ const brewerColors = [
   "#CF1C90",
   "#f97b72",
   "#4b4b8f",
-  "#A5AA99",
 ];
 
 const getColorFromNeighbours = (neighbourColours) => {
