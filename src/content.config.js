@@ -14,6 +14,14 @@ const walks = defineCollection({
       geojson: reference("walkGeoJSON"),
       cover: image(),
       date: z.date(),
+      trails: z.array(reference("trails")).optional(),
+      tags: z.array(reference("tags")).optional(),
+      length: z.number().optional(),
+      elevation: z.number().optional(),
+      duration: z.number().optional(),
+      highlights: z
+        .array(z.object({ name: z.string(), icon: z.string() }))
+        .optional(),
     }),
 });
 
@@ -24,4 +32,24 @@ const walkGeoJSON = defineCollection({
   }),
 });
 
-export const collections = { walks, walkGeoJSON };
+const trails = defineCollection({
+  loader: glob({
+    pattern: "**/*.yaml",
+    base: "./src/data/trails",
+    schema: z.object({
+      name: z.string(),
+      description: z.string(),
+      length: z.number(),
+    }),
+  }),
+});
+
+const tags = defineCollection({
+  loader: glob({
+    pattern: "**/*.yaml",
+    base: "./src/data/tags",
+    schema: z.object({ name: z.string() }),
+  }),
+});
+
+export const collections = { walks, walkGeoJSON, trails, tags };
