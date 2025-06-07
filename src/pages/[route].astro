@@ -12,7 +12,9 @@ export async function getStaticPaths() {
       const geojsonEntry = await getEntry("walkGeoJSON", walk.data.geojson.id);
       const tags = walk.data?.tags ? await getEntries(walk.data.tags) : [];
 
-      const trails = walk.data?.tags ? await getEntries(walk.data.trails) : [];
+      const trails = walk.data?.trails
+        ? await getEntries(walk.data.trails)
+        : [];
 
       return {
         params: { route: walk.data.slug },
