@@ -1,16 +1,22 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntries, getEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import Map from "../components/map";
+import Map from "../components/map.astro";
+import Tag from "../components/common/tag.astro";
+import { Icon } from "astro-icon/components";
+import { roundToQuarter } from "../utils/rounding";
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
   const paths = await Promise.all(
     walks.map(async (walk) => {
       const geojsonEntry = await getEntry("walkGeoJSON", walk.data.geojson.id);
+      const tags = walk.data?.tags ? await getEntries(walk.data.tags) : [];
+
+      const trails = walk.data?.tags ? await getEntries(walk.data.trails) : [];
 
       return {
         params: { route: walk.data.slug },
-        props: { walk, geojsonEntry },
+        props: { walk: { ...walk, tags, trails }, geojsonEntry },
       };
     })
   );
@@ -20,11 +26,83 @@ const { walk, geojsonEntry } = Astro.props;
 ---
 
 <Layout>
-  <div class="py-6">
-    <h1 class="text-3xl font-bold">{walk.data.title}</h1>
-    <h2 class="text-gray-600 pt-2">{walk.data.description}</h2>
+  <div class="pt-6">
+    <div class="">
+      <div class="flex justify-between gap-4">
+        <div class="flex flex-col">
+          {
+            !!walk.tags.length && (
+              <div class="flex gap-2 mb-3">
+                {walk.tags.map((tag) => (
+                  <Tag>{tag.data.name}</Tag>
+                ))}
+              </div>
+            )
+          }
+          <h1 class="text-4xl font-light mb-6">{walk.data.title}</h1>
+          {
+            !!walk.data.length && (
+              <div class="text-slate-500 text-sm flex gap-x-4">
+                <div class="flex items-center gap-x-2">
+                  <Icon name="lucide:route" class="size-4" />
+                  <abbr
+                    title={`${(walk.data.length / 1.609).toFixed(1)} miles`}
+                    class="distance"
+                  >
+                    {walk.data.length} km
+                  </abbr>
+                </div>
+                <div class="flex items-center gap-x-2">
+                  <Icon name="lucide:trending-up" class="size-4" />
+                  {walk.data.elevation} m
+                </div>
+                <div class="flex items-center gap-x-2">
+                  <Icon name="lucide:clock" class="size-4" />
+                  {roundToQuarter(walk.data.duration)} h
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="h-[400px]">
-    <Map geoData={geojsonEntry.data} client:only />
+  <div class="h-[400px] my-6">
+    <Map route={geojsonEntry.data} />
   </div>
+  {
+    walk.data.highlights && (
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-6">
+            Highlights
+          </h2>
+          <div class="flex flex-col gap-y-4">
+            {walk.data.highlights.map((item) => (
+              <div class="flex items-center gap-x-4">
+                <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center">
+                  <Icon name={item.icon} class="size-5 text-slate-500" />
+                </div>
+                <span class="text-slate-600">{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        {walk.trails && (
+          <div>
+            <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-6">
+              Trails
+            </h2>
+            <div class="flex flex-col gap-y-3">
+              {walk.trails.map((trail) => (
+                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group">
+                  {trail.data.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
 </Layout>

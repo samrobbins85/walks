@@ -15,15 +15,21 @@ import SignPost from "../assets/signpost.svg";
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
   <body>
-    <nav
-      class="h-12 flex px-8 py-2 items-center border-b border-gray-200 justify-between"
-    >
-      <a class="flex gap-x-2 items-center font-medium" href="/">
-        <SignPost class="text-stone-600 size-6" />
-        Sam's Walks
-      </a>
+    <nav class="border-b border-gray-200">
+      <div
+        class="max-w-7xl mx-auto flex px-4 py-4 items-center justify-between"
+      >
+        <a class="flex gap-x-2 items-center font-medium" href="/">
+          <SignPost class="text-stone-600 size-6" />
+          Sam's Walks
+        </a>
+        <!-- <ul class="flex gap-x-4">
+          <li><a href="/walks">Walks</a></li>
+          <li><a href="/trails">Trails</a></li>
+        </ul> -->
+      </div>
     </nav>
-    <main class="max-w-7xl mx-auto px-8">
+    <main class="max-w-7xl mx-auto px-4">
       <slot />
     </main>
   </body>

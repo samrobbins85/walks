@@ -29,10 +29,6 @@ const routes = rawRoutes.map((route) => ({
   import L from "leaflet";
   import { shuffle } from "../utils";
   const mapElement = document.getElementById("map");
-  function getColor(index, total) {
-    const hue = (index / total) * 360;
-    return `hsl(${hue}, 50%, 50%)`;
-  }
   const routes = JSON.parse(mapElement.dataset.routes);
   const map = L.map("map");
   L.tileLayer(
