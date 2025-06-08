@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SignPost from "../assets/signpost.svg";
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -10,7 +11,7 @@ import SignPost from "../assets/signpost.svg";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/signpost.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Sam's walks</title>
+    <title>{title ?? "Sam's walks"}</title>
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
