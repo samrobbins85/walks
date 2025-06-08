@@ -5,6 +5,9 @@ import Map from "../components/map.astro";
 import Tag from "../components/common/tag.astro";
 import { Icon } from "astro-icon/components";
 import { roundToQuarter } from "../utils/rounding";
+import { Image } from "astro:assets";
+
+import "photoswipe/style.css";
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
   const paths = await Promise.all(
@@ -25,6 +28,7 @@ export async function getStaticPaths() {
   return paths;
 }
 const { walk, geojsonEntry } = Astro.props;
+console.log(walk.data.gallery);
 ---
 
 <Layout>
@@ -107,4 +111,56 @@ const { walk, geojsonEntry } = Astro.props;
       </div>
     )
   }
+
+  {
+    !!walk.data?.gallery?.length && (
+      <div>
+        <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mt-8 mb-4">
+          Photos
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="my-gallery">
+          {walk.data.gallery.map((image) => (
+            <a
+              href={image.src}
+              data-pswp-width={image.width}
+              data-pswp-height={image.height}
+              data-cropped="true"
+              target="_blank"
+              class="aspect-square"
+            >
+              <Image
+                quality={90}
+                format="jpg"
+                src={image as ImageMetadata}
+                alt=""
+                class="h-full w-full rounded-lg object-cover"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
 </Layout>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#my-gallery",
+    children: "a",
+    pswpModule: () => import("photoswipe"),
+    zoom: false,
+    counter: false,
+    padding: { top: 20, bottom: 20, left: 100, right: 100 },
+  });
+  lightbox.addFilter("domItemData", (itemData, element, linkEl) => {
+    const imgEl = linkEl.querySelector("img");
+    if (imgEl) {
+      itemData.src = imgEl.currentSrc || imgEl.src;
+      itemData.msrc = imgEl.currentSrc || imgEl.src;
+    }
+    return itemData;
+  });
+  lightbox.init();
+</script>
