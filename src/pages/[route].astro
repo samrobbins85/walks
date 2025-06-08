@@ -152,9 +152,9 @@ console.log(walk.data.gallery);
     pswpModule: () => import("photoswipe"),
     zoom: false,
     counter: false,
-    padding: { top: 20, bottom: 20, left: 100, right: 100 },
+    padding: { top: 20, bottom: 20, left: 20, right: 20 },
   });
-  lightbox.addFilter("domItemData", (itemData, element, linkEl) => {
+  lightbox.addFilter("domItemData", (itemData, _element, linkEl) => {
     const imgEl = linkEl.querySelector("img");
     if (imgEl) {
       itemData.src = imgEl.currentSrc || imgEl.src;
