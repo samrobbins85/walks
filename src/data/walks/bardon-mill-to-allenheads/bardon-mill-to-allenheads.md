@@ -19,5 +19,13 @@ highlights:
   - name: "Staward Peel"
     icon: "lucide:castle"
   - name: Allendale Town
-    icon: lucide:house
+    icon: lucide-lab:houses
+gallery:
+  - "./1.jpg"
+  - "./2.jpg"
+  - "./3.jpg"
+  - "./4.jpg"
+  - "./5.jpg"
+  - "./6.jpg"
+  - "./7.jpg"
 ---

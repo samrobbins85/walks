@@ -3,7 +3,7 @@ title: "Alnmouth to Ashington"
 description: "Walk along the coast"
 geojson: "alnmouth-to-ashington/map"
 slug: "alnmouth-to-ashington"
-cover: "./alnmouth.jpg"
+cover: "./cover.jpg"
 date: 2025-05-31
 tags:
   - "coast"
@@ -23,4 +23,10 @@ highlights:
     icon: lucide:sailboat
   - name: Druridge Bay
     icon: proicons:beach
+gallery:
+  - "./alnmouth.jpg"
+  - "./1.jpg"
+  - "./2.jpg"
+  - "./3.jpg"
+  - "./4.jpg"
 ---
