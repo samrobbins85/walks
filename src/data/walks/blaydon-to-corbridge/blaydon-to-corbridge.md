@@ -1,7 +1,6 @@
 ---
 title: "Blaydon to Corbridge"
 description: "Walk along the tyne"
-geojson: "blaydon-to-corbridge/map"
 slug: "blaydon-to-corbridge"
 cover: "./cover.jpg"
 date: 2025-04-27
