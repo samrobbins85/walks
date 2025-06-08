@@ -19,4 +19,10 @@ highlights:
     icon: "roman2"
   - name: "St Oswald's Church"
     icon: "lucide:church"
+gallery:
+  - "./1.jpg"
+  - "./2.jpg"
+  - "./3.jpg"
+  - "./4.jpg"
+  - "./5.jpg"
 ---

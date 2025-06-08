@@ -8,6 +8,7 @@ import { roundToQuarter } from "../utils/rounding";
 import { Image } from "astro:assets";
 
 import "photoswipe/style.css";
+import FormattedDate from "../components/common/FormattedDate.astro";
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
   const paths = await Promise.all(
@@ -65,6 +66,10 @@ console.log(walk.data.gallery);
                 <div class="flex items-center gap-x-2">
                   <Icon name="lucide:clock" class="size-4" />
                   {roundToQuarter(walk.data.duration)} h
+                </div>
+                <div class="flex items-center gap-x-2">
+                  <Icon name="lucide:calendar-days" class="size-4" />
+                  <FormattedDate date={walk.data.date} />
                 </div>
               </div>
             )
@@ -151,8 +156,8 @@ console.log(walk.data.gallery);
     children: "a",
     pswpModule: () => import("photoswipe"),
     zoom: false,
-    counter: false,
     padding: { top: 20, bottom: 20, left: 20, right: 20 },
+    loop: false,
   });
   lightbox.addFilter("domItemData", (itemData, _element, linkEl) => {
     const imgEl = linkEl.querySelector("img");
