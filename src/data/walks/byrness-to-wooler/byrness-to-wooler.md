@@ -3,7 +3,7 @@ title: "Byrness to Wooler"
 description: "Walk along the border ridge"
 geojson: "byrness-to-wooler/map"
 slug: "byrness-to-wooler"
-cover: "./swaledales.jpg"
+cover: "./cover.jpg"
 date: 2024-10-05
 tags:
   - "hills"

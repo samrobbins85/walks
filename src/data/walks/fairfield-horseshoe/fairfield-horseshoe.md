@@ -3,7 +3,7 @@ title: "Fairfield Horseshoe"
 description: "Walk from Ambleside"
 geojson: "fairfield-horseshoe/map"
 slug: "fairfield-horseshoe"
-cover: "./windermere.jpg"
+cover: "./cover.jpg"
 date: 2023-06-02
 length: 17.5
 duration: 5

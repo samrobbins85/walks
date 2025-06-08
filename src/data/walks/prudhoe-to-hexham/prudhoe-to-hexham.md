@@ -3,7 +3,7 @@ title: "Prudhoe to Hexham"
 description: "Walk along the tyne"
 geojson: "prudhoe-to-hexham/map"
 slug: "prudhoe-to-hexham"
-cover: "./hexham.jpg"
+cover: "./cover.jpg"
 date: 2024-09-29
 tags:
   - "river"
