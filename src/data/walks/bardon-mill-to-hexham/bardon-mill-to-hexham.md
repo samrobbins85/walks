@@ -3,7 +3,7 @@ title: "Bardon Mill to Hexham"
 description: "Walk along hadrian's wall"
 geojson: "bardon-mill-to-hexham/map"
 slug: "bardon-mill-to-hexham"
-cover: "./north-tyne.jpg"
+cover: "./cover.jpg"
 date: 2024-09-06
 tags:
   - "history"
@@ -19,10 +19,4 @@ highlights:
     icon: "roman2"
   - name: "St Oswald's Church"
     icon: "lucide:church"
-gallery:
-  - "./1.jpg"
-  - "./2.jpg"
-  - "./3.jpg"
-  - "./4.jpg"
-  - "./5.jpg"
 ---
