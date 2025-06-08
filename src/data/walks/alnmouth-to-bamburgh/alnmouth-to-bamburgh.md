@@ -3,7 +3,7 @@ title: "Alnmouth to Bamburgh"
 description: "Walk along the coast"
 geojson: "alnmouth-to-bamburgh/map"
 slug: "alnmouth-to-bamburgh"
-cover: "./dunstanburgh.jpg"
+cover: "./cover.jpg"
 date: 2025-03-02
 tags:
   - "coast"
@@ -25,12 +25,4 @@ highlights:
     icon: proicons:beach
   - name: Bamburgh Castle
     icon: lucide:castle
-gallery:
-  - "./1.jpg"
-  - "./2.jpg"
-  - "./3.jpg"
-  - "./4.jpg"
-  - "./5.jpg"
-  - "./6.jpg"
-  - "./7.jpg"
 ---

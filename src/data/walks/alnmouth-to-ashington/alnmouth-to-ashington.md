@@ -23,10 +23,4 @@ highlights:
     icon: lucide:sailboat
   - name: Druridge Bay
     icon: proicons:beach
-gallery:
-  - "./alnmouth.jpg"
-  - "./1.jpg"
-  - "./2.jpg"
-  - "./3.jpg"
-  - "./4.jpg"
 ---
