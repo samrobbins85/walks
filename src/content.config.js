@@ -37,11 +37,11 @@ const trails = defineCollection({
   loader: glob({
     pattern: "**/*.yaml",
     base: "./src/data/trails",
-    schema: z.object({
-      name: z.string(),
-      description: z.string(),
-      length: z.number(),
-    }),
+  }),
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    length: z.number(),
   }),
 });
 
@@ -49,19 +49,19 @@ const tags = defineCollection({
   loader: glob({
     pattern: "**/*.yaml",
     base: "./src/data/tags",
-    schema: z.object({ name: z.string() }),
   }),
+  schema: z.object({ name: z.string() }),
 });
 
 const peaks = defineCollection({
   loader: glob({
     pattern: "**/*.yaml",
     base: "./src/data/peaks",
-    schema: z.object({
-      name: z.string(),
-      height: z.string(),
-      collections: z.array(z.reference("peakCollections")).optional(),
-    }),
+  }),
+  schema: z.object({
+    name: z.string(),
+    height: z.number(),
+    collections: z.array(reference("peakCollections")).optional(),
   }),
 });
 
@@ -69,7 +69,10 @@ const peakCollections = defineCollection({
   loader: glob({
     pattern: "**/*.yaml",
     base: "./src/data/peakCollections",
-    schema: z.object({ name: z.string(), description: z.string() }),
+  }),
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
   }),
 });
 
