@@ -23,6 +23,7 @@ const walks = defineCollection({
         .array(z.object({ name: z.string(), icon: z.string() }))
         .optional(),
       peaks: z.array(reference("peaks")).optional(),
+      gallery: z.array(image()).optional(),
     }),
 });
 
