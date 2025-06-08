@@ -22,6 +22,7 @@ const walks = defineCollection({
       highlights: z
         .array(z.object({ name: z.string(), icon: z.string() }))
         .optional(),
+      peaks: z.array(reference("peaks")).optional(),
     }),
 });
 
@@ -52,4 +53,31 @@ const tags = defineCollection({
   }),
 });
 
-export const collections = { walks, walkGeoJSON, trails, tags };
+const peaks = defineCollection({
+  loader: glob({
+    pattern: "**/*.yaml",
+    base: "./src/data/peaks",
+    schema: z.object({
+      name: z.string(),
+      height: z.string(),
+      collections: z.array(z.reference("peakCollections")).optional(),
+    }),
+  }),
+});
+
+const peakCollections = defineCollection({
+  loader: glob({
+    pattern: "**/*.yaml",
+    base: "./src/data/peakCollections",
+    schema: z.object({ name: z.string(), description: z.string() }),
+  }),
+});
+
+export const collections = {
+  walks,
+  walkGeoJSON,
+  trails,
+  tags,
+  peaks,
+  peakCollections,
+};

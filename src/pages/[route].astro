@@ -90,7 +90,7 @@ const { walk, geojsonEntry } = Astro.props;
             ))}
           </div>
         </div>
-        {walk.trails && (
+        {!!walk.trails.length && (
           <div>
             <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-6">
               Trails
@@ -98,7 +98,7 @@ const { walk, geojsonEntry } = Astro.props;
             <div class="flex flex-col gap-y-3">
               {walk.trails.map((trail) => (
                 <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group">
-                  {trail.data.name}
+                  {trail?.data?.name}
                 </div>
               ))}
             </div>
