@@ -8,6 +8,9 @@ date: 2024-08-16
 length: 34.68
 duration: 7
 elevation: 533
+tags:
+  - "moor"
+  - "history"
 trails:
   - "st-oswalds-way"
   - "the-way-of-light"
