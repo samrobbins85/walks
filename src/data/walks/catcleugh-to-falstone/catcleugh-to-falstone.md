@@ -8,6 +8,7 @@ date: 2025-04-02
 tags:
   - "moor"
   - "lake"
+  - "forest"
 length: 30.68
 elevation: 652
 duration: 6.5

@@ -1,1 +1,2 @@
-name: Coast
+name: Coastal
+class: "bg-yellow-50 text-yellow-800 border-yellow-200 hover:bg-yellow-100"

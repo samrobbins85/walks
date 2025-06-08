@@ -16,9 +16,9 @@ const walks = defineCollection({
       date: z.date(),
       trails: z.array(reference("trails")).optional(),
       tags: z.array(reference("tags")).optional(),
-      length: z.number().optional(),
-      elevation: z.number().optional(),
-      duration: z.number().optional(),
+      length: z.number(),
+      elevation: z.number(),
+      duration: z.number(),
       highlights: z
         .array(z.object({ name: z.string(), icon: z.string() }))
         .optional(),
@@ -50,7 +50,7 @@ const tags = defineCollection({
     pattern: "**/*.yaml",
     base: "./src/data/tags",
   }),
-  schema: z.object({ name: z.string() }),
+  schema: z.object({ name: z.string(), class: z.string().optional() }),
 });
 
 const peaks = defineCollection({

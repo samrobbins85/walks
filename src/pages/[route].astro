@@ -36,7 +36,7 @@ const { walk, geojsonEntry } = Astro.props;
             !!walk.tags.length && (
               <div class="flex gap-2 mb-3">
                 {walk.tags.map((tag) => (
-                  <Tag>{tag.data.name}</Tag>
+                  <Tag className={tag.data.class}>{tag.data.name}</Tag>
                 ))}
               </div>
             )
