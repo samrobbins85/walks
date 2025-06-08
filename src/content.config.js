@@ -11,7 +11,6 @@ const walks = defineCollection({
       title: z.string(),
       slug: z.string(),
       description: z.string(),
-      geojson: reference("walkGeoJSON"),
       cover: image(),
       date: z.date(),
       trails: z.array(reference("trails")).optional(),
@@ -25,13 +24,6 @@ const walks = defineCollection({
       peaks: z.array(reference("peaks")).optional(),
       gallery: z.array(image()).optional(),
     }),
-});
-
-const walkGeoJSON = defineCollection({
-  loader: glob({
-    pattern: "**/*.json",
-    base: "./src/data/walks",
-  }),
 });
 
 const trails = defineCollection({
@@ -79,7 +71,6 @@ const peakCollections = defineCollection({
 
 export const collections = {
   walks,
-  walkGeoJSON,
   trails,
   tags,
   peaks,

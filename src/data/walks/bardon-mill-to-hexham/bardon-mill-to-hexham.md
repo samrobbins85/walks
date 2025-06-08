@@ -1,7 +1,6 @@
 ---
 title: "Bardon Mill to Hexham"
 description: "Walk along hadrian's wall"
-geojson: "bardon-mill-to-hexham/map"
 slug: "bardon-mill-to-hexham"
 cover: "./cover.jpg"
 date: 2024-09-06

@@ -2,15 +2,27 @@
 import FullMap from "../components/fullMap.astro";
 import WalkCard from "../components/walkCard.astro";
 import Layout from "../layouts/Layout.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 const walks = await getCollection("walks");
-const routes = await Promise.all(
-  walks.map(async (walk) => {
-    const geojsonEntry = await getEntry("walkGeoJSON", walk.data.geojson.id);
+const geojsonMatches = import.meta.glob("/src/data/walks/**/*.json", {
+  eager: true,
+}) as Record<string, { default: any }>;
 
-    return { ...walk.data, geojson: geojsonEntry.data };
-  })
-);
+const routes = walks.map((walk) => {
+  const lastSlashIndex = walk.filePath.lastIndexOf("/");
+  const directoryPath = walk.filePath.slice(0, lastSlashIndex);
+
+  const geojsonEntry = Object.entries(geojsonMatches).find(([path]) =>
+    path.includes(directoryPath)
+  );
+
+  const geojsonData = geojsonEntry ? geojsonEntry[1].default : null;
+
+  return {
+    ...walk.data,
+    geojson: geojsonData,
+  };
+});
 ---
 
 <Layout>

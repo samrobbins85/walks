@@ -1,7 +1,6 @@
 ---
 title: "Haltwhistle to Carlisle"
 description: "Walk along Hadrian's wall"
-geojson: "haltwhistle-to-carlisle/map"
 slug: "haltwhistle-to-carlisle"
 cover: "./cover.jpg"
 date: 2024-09-16
