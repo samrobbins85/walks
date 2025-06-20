@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const trails = await getCollection("trails");
+---
+
+<Layout title="Trails">
+  <h1 class="text-4xl font-light mb-6 pt-6">Trails</h1>
+  <div>
+    {trails.map((trail) => <div>{trail.data.name}</div>)}
+  </div>
+</Layout>
