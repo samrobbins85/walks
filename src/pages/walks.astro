@@ -7,9 +7,25 @@ const walks = await getCollection("walks");
 const tags = await getCollection("tags");
 ---
 <Layout>
-  <div class="pt-6" x-data="{activeTag: 'all'}">
+  <div class="pt-6" x-data="{
+    activeTag: 'all',
+    init() {
+          const params = new URLSearchParams(window.location.search);
+          this.activeTag = params.get('tag') || 'all';
+          this.$watch('activeTag', value => {
+            const url = new URL(window.location);
+            if (value === 'all') {
+              url.searchParams.delete('tag');
+            } else {
+              url.searchParams.set('tag', value);
+            }
+            history.replaceState(null, '', url);
+          });
+        }
+    }"
+  >
     <h1 class="text-4xl font-light mb-6">Walks</h1>
-    <div class="flex gap-4 pb-4">
+    <div class="flex gap-3 pb-4 flex-wrap">
       <button
         @click="activeTag = 'all'"
         :class="{ 'bg-green-500 text-white': activeTag === 'all', 'bg-slate-100 hover:bg-slate-200  text-slate-600 hover:text-slate-900': activeTag !== 'all' }"
