@@ -1,9 +1,11 @@
 ---
+import Tag from "../components/common/tag.astro";
 import FullMap from "../components/fullMap.astro";
 import WalkCard from "../components/walkCard.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 const walks = await getCollection("walks");
+
 const geojsonMatches = import.meta.glob("/src/data/walks/**/*.json", {
   eager: true,
 }) as Record<string, { default: any }>;
@@ -29,11 +31,24 @@ const routes = walks.map((walk) => {
   <div class="h-[600px] mt-6">
     <FullMap routes={routes} />
   </div>
-  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
+  <h2 class="text-2xl pb-2 pt-4">Recent Walks</h2>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-8">
     {
       walks
         .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-        .map((walk) => <WalkCard walk={walk} />)
+        .slice(0, 4)
+        .map((walk) => (
+          <li>
+            <WalkCard walk={walk} />
+          </li>
+        ))
     }
   </ul>
+  <div class="flex justify-center">
+    <a
+      href="/walks"
+      class="border px-4 py-2 rounded-lg border-gray-200 hover:bg-gray-100"
+      >View all {walks.length} walks</a
+    >
+  </div>
 </Layout>

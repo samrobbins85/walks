@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import WalkCard from "../components/walkCard.astro";
+
+const walks = await getCollection("walks");
+const tags = await getCollection("tags");
+---
+<Layout>
+  <div class="pt-6" x-data="{activeTag: 'all'}">
+    <h1 class="text-4xl font-light mb-6">Walks</h1>
+    <div class="flex gap-4 pb-4">
+      <button
+        @click="activeTag = 'all'"
+        :class="{ 'bg-green-500 text-white': activeTag === 'all', 'bg-slate-100 hover:bg-slate-200  text-slate-600 hover:text-slate-900': activeTag !== 'all' }"
+        class="cursor-pointer px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
+      >All</button>
+      {
+        tags.map((tagItem) => (
+          <button
+            @click={`activeTag = '${tagItem.id}'`}
+            :class={`{ 'bg-green-500 text-white': activeTag === '${tagItem.id}',  'bg-slate-100 hover:bg-slate-200  text-slate-600 hover:text-slate-900': activeTag !== '${tagItem.id}'}`}
+            class="cursor-pointer px-3 py-1.5 rounded-full text-sm font-medium transition-colors"
+          >
+            {tagItem.data.name}
+          </button>
+        ))
+      }
+    </div>
+
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-8">
+      {
+        walks.map((walk) => {
+          const tagIds = walk.data.tags?.map(t => t.id) ?? [];
+          const tagIdsExpr = `['${tagIds.join("','")}']`; 
+          return (
+            <li
+              x-show={`activeTag === 'all' || ${tagIdsExpr}.includes(activeTag)`}
+            >
+              <WalkCard walk={walk} />
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+
+
+</Layout>

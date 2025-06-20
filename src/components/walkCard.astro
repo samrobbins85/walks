@@ -4,7 +4,7 @@ import FormattedDate from "./common/FormattedDate.astro";
 const { walk } = Astro.props;
 ---
 
-<li>
+<div>
   <a href={`/${walk.data.slug}`}>
     <Image
       src={walk.data.cover}
@@ -19,4 +19,4 @@ const { walk } = Astro.props;
       </span>
     </flex>
   </a>
-</li>
+</div>
