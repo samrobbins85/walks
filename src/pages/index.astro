@@ -37,7 +37,11 @@ const routes = walks.map((walk) => {
       walks
         .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
         .slice(0, 4)
-        .map((walk) => <WalkCard walk={walk} />)
+        .map((walk) => (
+          <li>
+            <WalkCard walk={walk} />
+          </li>
+        ))
     }
   </ul>
   <div class="flex justify-center">
