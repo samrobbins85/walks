@@ -1,7 +1,10 @@
 ---
-const { className } = Astro.props;
+const { className, id } = Astro.props;
 ---
 
-<div class={`px-2.5 py-0.5 rounded-full border text-sm ${className}`}>
+<a
+  class={`px-2.5 py-0.5 rounded-full border text-sm ${className}`}
+  href={`/walks?tag=${id}`}
+>
   <slot />
-</div>
+</a>
