@@ -3,6 +3,9 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
 const { trail } = Astro.props;
+const percentComplete = Math.round(
+  (trail.data.completed / trail.data.length) * 100
+);
 ---
 
 <a
@@ -26,5 +29,25 @@ const { trail } = Astro.props;
         {trail.walks.length === 1 ? "walk" : "walks"}</span
       >
     </div>
+    {
+      trail.data.completed && (
+        <div class="pt-4 flex flex-col">
+          <span
+            class={`text-xs font-medium pb-2 ${percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
+          >
+            {percentComplete === 100 ? "Completed" : "In progress"}
+          </span>
+          <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div
+              class={`h-full transition-all duration-300 ${percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
+              style={`width: ${percentComplete}%;`}
+            />
+          </div>
+          <span class="text-xs text-slate-600 pt-1">
+            {percentComplete}% complete
+          </span>
+        </div>
+      )
+    }
   </div>
 </a>
