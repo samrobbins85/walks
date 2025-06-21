@@ -5,7 +5,10 @@ import { Image } from "astro:assets";
 const { trail } = Astro.props;
 ---
 
-<div class="border border-slate-200 rounded-lg overflow-hidden">
+<a
+  href={`/trails/${trail.id}`}
+  class="border border-slate-200 rounded-lg overflow-hidden"
+>
   <Image src={trail.cover} alt="" class="h-72 object-cover" />
   <div class="flex flex-col p-6">
     <span class="text-xl font-medium">{trail.data.name}</span>
@@ -24,4 +27,4 @@ const { trail } = Astro.props;
       >
     </div>
   </div>
-</div>
+</a>

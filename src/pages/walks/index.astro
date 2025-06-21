@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import WalkCard from "../components/walkCard.astro";
+import Layout from "../../layouts/Layout.astro";
+import WalkCard from "../../components/walkCard.astro";
 
 const walks = await getCollection("walks");
 const tags = await getCollection("tags");

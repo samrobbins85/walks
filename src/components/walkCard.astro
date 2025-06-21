@@ -5,7 +5,7 @@ const { walk } = Astro.props;
 ---
 
 <div>
-  <a href={`/${walk.data.slug}`}>
+  <a href={`/walks/${walk.data.slug}`}>
     <Image
       src={walk.data.cover}
       alt=""
