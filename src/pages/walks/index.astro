@@ -5,6 +5,9 @@ import WalkCard from "../../components/walkCard.astro";
 
 const walks = await getCollection("walks");
 const tags = await getCollection("tags");
+const sortedWalks = walks.sort(
+      (a, b) => b.data.date.getTime() - a.data.date.getTime()
+    );
 ---
 <Layout>
   <div class="pt-6" x-data="{
@@ -46,7 +49,7 @@ const tags = await getCollection("tags");
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-8">
       {
-        walks.map((walk) => {
+        sortedWalks.map((walk) => {
           const tagIds = walk.data.tags?.map(t => t.id) ?? [];
           const tagIdsExpr = `['${tagIds.join("','")}']`; 
           return (
