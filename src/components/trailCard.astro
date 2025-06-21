@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+const { trail } = Astro.props;
+---
+
+<a
+  href={`/trails/${trail.id}`}
+  class="border border-slate-200 rounded-lg overflow-hidden"
+>
+  <Image src={trail.cover} alt="" class="h-72 object-cover" />
+  <div class="flex flex-col p-6">
+    <span class="text-xl font-medium">{trail.data.name}</span>
+    <span class="text-slate-500 line-clamp-2 h-16"
+      >{trail.data.description}</span
+    >
+    <div class="flex gap-x-4">
+      <span class="flex items-center gap-x-2 text-sm text-slate-500">
+        <Icon name="lucide:route" class="size-4" />
+        {trail.data.length}km</span
+      >
+      <span class="flex items-center gap-x-2 text-sm text-slate-500">
+        <Icon name="lucide:footprints" class="size-4" />
+        {trail.walks.length}
+        {trail.walks.length === 1 ? "walk" : "walks"}</span
+      >
+    </div>
+  </div>
+</a>
