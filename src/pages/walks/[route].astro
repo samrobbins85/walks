@@ -1,13 +1,13 @@
 ---
 import { getCollection, getEntries } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import Map from "../components/map.astro";
-import Tag from "../components/common/tag.astro";
+import Layout from "../../layouts/Layout.astro";
+import Map from "../../components/map.astro";
+import Tag from "../../components/common/tag.astro";
 import { Icon } from "astro-icon/components";
-import { roundToQuarter } from "../utils/rounding";
+import { roundToQuarter } from "../../utils/rounding";
 import { Image } from "astro:assets";
 import "photoswipe/style.css";
-import FormattedDate from "../components/common/FormattedDate.astro";
+import FormattedDate from "../../components/common/FormattedDate.astro";
 
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
@@ -132,9 +132,13 @@ const { walk, geojsonData } = Astro.props;
             </h2>
             <div class="flex flex-col gap-y-3">
               {walk.trails.map((trail) => (
-                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group">
-                  {trail?.data?.name}
-                </div>
+                <a
+                  href={`/trails/${trail.id}`}
+                  class="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
+                >
+                  <span>{trail?.data?.name}</span>
+                  <Icon name="lucide:move-right" />
+                </a>
               ))}
             </div>
           </div>
