@@ -1,0 +1,51 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getTrails } from "../../utils/getTrails";
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import WalkCard from "../../components/walkCard.astro";
+
+export const getStaticPaths = (async () => {
+  const sortedTrails = await getTrails();
+
+  return sortedTrails.map((trail) => ({
+    params: { trail: trail.id },
+    props: { trail },
+  }));
+}) satisfies GetStaticPaths;
+const { trail } = Astro.props;
+---
+
+<Layout title={trail.data.name}>
+  <div class="grid md:grid-cols-2 pt-6 gap-4">
+    <div class="flex flex-col justify-center">
+      <h1 class="text-4xl font-light mb-6">{trail.data.name}</h1>
+      <h2>{trail.data.description}</h2>
+      <div class="flex gap-x-4 pt-2">
+        <span class="flex items-center gap-x-2 text-sm text-slate-500">
+          <Icon name="lucide:route" class="size-4" />
+          {trail.data.length}km</span
+        >
+        <span class="flex items-center gap-x-2 text-sm text-slate-500">
+          <Icon name="lucide:footprints" class="size-4" />
+          {trail.walks.length}
+          {trail.walks.length === 1 ? "walk" : "walks"}</span
+        >
+      </div>
+    </div>
+    <div>
+      <Image
+        src={trail.cover as any}
+        alt=""
+        class="w-full aspect-4/3 object-cover rounded-lg"
+      />
+    </div>
+  </div>
+  <div class="pt-4">
+    <h2 class="text-2xl font-light mb-6">Walks</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-8">
+      {trail.walks.map((walk) => <WalkCard walk={walk} />)}
+    </div>
+  </div>
+</Layout>

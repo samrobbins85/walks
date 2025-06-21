@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import TrailCard from "../../components/trailCard.astro";
+import { getTrails } from "../../utils/getTrails";
+
+const sortedTrails = await getTrails();
+---
+
+<Layout title="Trails">
+  <h1 class="text-4xl font-light mb-6 pt-6">Trails</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {sortedTrails.map((trail) => <TrailCard trail={trail} />)}
+  </div>
+</Layout>
