@@ -68,7 +68,7 @@ const routes = rawRoutes.map((route) => ({
         });
 
         layer.on("click", () => {
-          const url = `/${route.slug}`;
+          const url = `/walks/${route.slug}`;
           window.location.href = url;
         });
       },
