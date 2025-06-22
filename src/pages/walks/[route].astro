@@ -75,33 +75,30 @@ const { walk, geojsonData } = Astro.props;
             )
           }
           <h1 class="text-4xl font-light mb-6">{walk.data.title}</h1>
-          {
-            !!walk.data.length && (
-              <div class="text-slate-500 text-sm flex gap-x-4">
-                <div class="flex items-center gap-x-2">
-                  <Icon name="lucide:route" class="size-4" />
-                  <abbr
-                    title={`${(walk.data.length / 1.609).toFixed(1)} miles`}
-                    class="distance"
-                  >
-                    {walk.data.length} km
-                  </abbr>
-                </div>
-                <div class="flex items-center gap-x-2">
-                  <Icon name="lucide:trending-up" class="size-4" />
-                  {walk.data.elevation} m
-                </div>
-                <div class="flex items-center gap-x-2">
-                  <Icon name="lucide:clock" class="size-4" />
-                  {roundToQuarter(walk.data.duration)} h
-                </div>
-                <div class="flex items-center gap-x-2">
-                  <Icon name="lucide:calendar-days" class="size-4" />
-                  <FormattedDate date={walk.data.date} />
-                </div>
-              </div>
-            )
-          }
+
+          <div class="text-slate-500 text-sm flex gap-x-4">
+            <div class="flex items-center gap-x-2">
+              <Icon name="lucide:route" class="size-4" />
+              <abbr
+                title={`${(walk.data.length / 1.609).toFixed(1)} miles`}
+                class="distance"
+              >
+                {walk.data.length} km
+              </abbr>
+            </div>
+            <div class="flex items-center gap-x-2">
+              <Icon name="lucide:trending-up" class="size-4" />
+              {walk.data.elevation} m
+            </div>
+            <div class="flex items-center gap-x-2">
+              <Icon name="lucide:clock" class="size-4" />
+              {roundToQuarter(walk.data.duration)} h
+            </div>
+            <div class="flex items-center gap-x-2">
+              <Icon name="lucide:calendar-days" class="size-4" />
+              <FormattedDate date={walk.data.date} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
