@@ -11,6 +11,7 @@ elevation: 729
 duration: 6.5
 trails:
   - "hadrians-wall"
+  - "a-pennine-journey"
 highlights:
   - name: "Houseteads Roman fort"
     icon: "roman2"

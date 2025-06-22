@@ -13,6 +13,7 @@ duration: 7
 trails:
   - "pennine-way"
   - "hadrians-wall"
+  - "a-pennine-journey"
 highlights:
   - name: "Wark Forest"
     icon: "lucide:tree-pine"

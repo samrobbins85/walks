@@ -117,7 +117,10 @@ const { walk, geojsonData } = Astro.props;
             {walk.data.highlights.map((item) => (
               <div class="flex items-center gap-x-4">
                 <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center">
-                  <Icon name={item.icon} class="size-5 text-slate-500" />
+                  <Icon
+                    name={item.icon}
+                    class="size-5 text-slate-500 highlight-icon"
+                  />
                 </div>
                 <span class="text-slate-600">{item.name}</span>
               </div>
