@@ -15,7 +15,7 @@ trails:
   - "england-coast-path"
 highlights:
   - name: Alnmouth
-    icon: lucide:house
+    icon: lucide-lab:houses
   - name: Warkworth Castle
     icon: lucide:castle
   - name: Amble Marina

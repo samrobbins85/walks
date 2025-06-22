@@ -9,7 +9,7 @@ tags:
   - "river"
 length: 9.68
 duration: 1.5
-elevation: 7.5
+elevation: 8
 trails:
   - "hadrians-wall"
   - "river-tyne-trail"

@@ -32,3 +32,7 @@
 .os-api-branding.logo.white {
   background-image: url(./img/os-logo-maps-white.svg);
 }
+
+.highlight-icon symbol * {
+  stroke-width: 1;
+}

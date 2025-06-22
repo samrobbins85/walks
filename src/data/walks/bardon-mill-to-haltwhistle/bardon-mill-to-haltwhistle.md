@@ -12,6 +12,7 @@ duration: 4
 trails:
   - "hadrians-wall"
   - "pennine-way"
+  - "a-pennine-journey"
 highlights:
   - name: "Crag Lough"
     icon: "lake"

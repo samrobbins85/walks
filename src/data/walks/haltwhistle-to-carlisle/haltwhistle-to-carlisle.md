@@ -12,6 +12,7 @@ elevation: 648
 trails:
   - "hadrians-wall"
   - "pennine-way"
+  - "a-pennine-journey"
 highlights:
   - name: "Cawfields Quarry"
     icon: "lake"
