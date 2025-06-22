@@ -9,10 +9,15 @@ import WalkCard from "../../components/walkCard.astro";
 export const getStaticPaths = (async () => {
   const sortedTrails = await getTrails();
 
-  return sortedTrails.map((trail) => ({
-    params: { trail: trail.id },
-    props: { trail },
-  }));
+  return sortedTrails.map((trail) => {
+    const percentComplete = Math.round(
+      (trail.data.completed / trail.data.length) * 100
+    );
+    return {
+      params: { trail: trail.id },
+      props: { trail: { ...trail, percentComplete } },
+    };
+  });
 }) satisfies GetStaticPaths;
 const { trail } = Astro.props;
 ---
@@ -33,6 +38,26 @@ const { trail } = Astro.props;
           {trail.walks.length === 1 ? "walk" : "walks"}</span
         >
       </div>
+      {
+        trail.data.completed && (
+          <div class="pt-4 flex flex-col max-w-md">
+            <span
+              class={`text-xs font-medium pb-2 ${trail.percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
+            >
+              {trail.percentComplete === 100 ? "Completed" : "In progress"}
+            </span>
+            <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div
+                class={`h-full transition-all duration-300 ${trail.percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
+                style={`width: ${trail.percentComplete}%;`}
+              />
+            </div>
+            <span class="text-xs text-slate-600 pt-1">
+              {trail.percentComplete}% complete
+            </span>
+          </div>
+        )
+      }
     </div>
     <div>
       <Image

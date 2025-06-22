@@ -11,8 +11,6 @@ tags:
 length: 30.68
 elevation: 652
 duration: 6.5
-trails:
-  - "lakeside-way"
 highlights:
   - name: "Catcleugh Reservoir"
     icon: "lake"
