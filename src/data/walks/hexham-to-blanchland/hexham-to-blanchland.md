@@ -1,12 +1,12 @@
 ---
-title: "Hexham to Allendale via Blanchland"
-description: "Walk in the North Pennines"
-slug: "hexham-blanchland-allendale"
+title: "Hexham to Blanchland and Back"
+description: "Walk along the border ridge"
+slug: "hexham-to-blanchland"
 cover: "./cover.jpg"
-date: 2025-04-30
-length: 37.5
-duration: 7.5
-elevation: 983
+date: 2025-08-10
+length: 40
+duration: 8
+elevation: 950
 tags:
   - "river"
   - "history"
@@ -23,6 +23,4 @@ highlights:
     icon: "lucide:trees"
   - name: "Blanchland"
     icon: "lucide-lab:houses"
-  - name: "Hexham Common"
-    icon: "lucide:bird"
 ---
