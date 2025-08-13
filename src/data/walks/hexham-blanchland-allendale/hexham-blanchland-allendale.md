@@ -1,6 +1,6 @@
 ---
 title: "Hexham to Allendale via Blanchland"
-description: "Walk along the border ridge"
+description: "Walk in the North Pennines"
 slug: "hexham-blanchland-allendale"
 cover: "./cover.jpg"
 date: 2025-04-30
