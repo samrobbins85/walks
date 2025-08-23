@@ -1,7 +1,7 @@
 ---
 title: "Haltwhistle to Alston via Pennine Way"
 description: "Walk in South Tynedale"
-slug: "haltwhistle-to-alston-pw"
+slug: "pw-haltwhistle-to-alston"
 cover: "./cover.jpg"
 date: 2025-08-18
 tags:
