@@ -1,6 +1,6 @@
 ---
-title: "Hexham to Blanchland and Back"
-description: "Walk along the border ridge"
+title: "Hexham to Blanchland and back"
+description: "Walk along devil's water"
 slug: "hexham-to-blanchland"
 cover: "./cover.jpg"
 date: 2025-08-10
