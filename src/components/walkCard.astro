@@ -21,12 +21,12 @@ const { walk } = Astro.props;
       <div class="flex items-center gap-x-2">
         <Icon name="lucide:route" class="size-4" />
         <span>
-          {walk.data.length} km
+          {Math.round(walk.data.length)} km
         </span>
       </div>
 
       <span class="text-sm text-slate-500 flex gap-x-2 items-center">
-        <Icon name="lucide:calendar" class="size-4" />
+        <Icon name="lucide:calendar-days" class="size-4" />
 
         <FormattedDate date={walk.data.date} />
       </span>
