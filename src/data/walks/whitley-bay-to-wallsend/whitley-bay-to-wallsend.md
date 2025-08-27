@@ -11,6 +11,7 @@ duration: 3.5
 elevation: 179
 trails:
   - "england-coast-path"
+  - "river-tyne-trail"
 highlights:
   - name: "Long Sands"
     icon: "proicons:beach"
