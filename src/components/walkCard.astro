@@ -2,7 +2,9 @@
 import { Image } from "astro:assets";
 import FormattedDate from "./common/FormattedDate.astro";
 import { Icon } from "astro-icon/components";
+import { getCover } from "../utils/getImages";
 const { walk } = Astro.props;
+const cover = await getCover(walk.data.slug);
 ---
 
 <a
@@ -10,7 +12,9 @@ const { walk } = Astro.props;
   class="border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col group"
 >
   <Image
-    src={walk.data.cover}
+    src={cover.src}
+    height={parseInt(cover.height)}
+    width={parseInt(cover.width)}
     alt=""
     class="aspect-4/3 object-cover mb-2 w-full"
   />

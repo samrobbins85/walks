@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import { getCover } from "./getImages";
 
 export async function getTrails() {
   const trails = await getCollection("trails");
@@ -10,7 +11,7 @@ export async function getTrails() {
   type TrailWithExtras = TrailEntry & {
     walks: WalkEntry[];
     latestWalkDate: Date;
-    cover: WalkEntry["data"]["cover"];
+    cover: any;
   };
 
   const trailWalkMap = new Map<string, TrailWithExtras>();
@@ -28,12 +29,12 @@ export async function getTrails() {
       (walk) => !usedCovers.includes(walk.id)
     );
     usedCovers.push(usableCover.id);
-
+    const r2Cover = await getCover(usableCover.data.slug);
     trailWalkMap.set(trailId, {
       ...trail,
       walks: relatedWalks,
       latestWalkDate: latestWalks[0].data.date,
-      cover: usableCover.data.cover,
+      cover: r2Cover,
     });
   }
 

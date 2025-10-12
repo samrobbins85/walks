@@ -5,9 +5,9 @@ import Map from "../../components/map.astro";
 import Tag from "../../components/common/tag.astro";
 import { Icon } from "astro-icon/components";
 import { roundToQuarter } from "../../utils/rounding";
-import { Image } from "astro:assets";
 import "photoswipe/style.css";
 import FormattedDate from "../../components/common/FormattedDate.astro";
+import getImages from "../../utils/getImages";
 
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
@@ -18,23 +18,11 @@ export async function getStaticPaths() {
       const trails = walk.data?.trails
         ? await getEntries(walk.data.trails)
         : [];
+      const r2Images = await getImages(walk.data.slug);
+
       const lastSlashIndex = walk.filePath.lastIndexOf("/");
 
       const directoryPath = walk.filePath.slice(0, lastSlashIndex);
-      const imageMatches = import.meta.glob(
-        "/src/data/walks/**/*.{jpg,jpeg,png,gif,webp,avif,svg}",
-        {
-          eager: true,
-        }
-      ) as Record<string, { default: ImageMetadata }>;
-
-      const gallery = Object.entries(imageMatches)
-        .filter(([path]) => path.includes(directoryPath))
-        .filter(([path]) => !path.endsWith("cover.jpg"))
-        .map(([path, imageModule]) => ({
-          src: imageModule.default,
-          filename: path.split("/").pop(),
-        }));
       const geojsonMatches = import.meta.glob("/src/data/walks/**/*.json", {
         eager: true,
       }) as Record<string, { default: object }>;
@@ -49,7 +37,10 @@ export async function getStaticPaths() {
 
       return {
         params: { route: walk.data.slug },
-        props: { walk: { ...walk, tags, trails, gallery }, geojsonData },
+        props: {
+          walk: { ...walk, tags, trails, r2Images },
+          geojsonData,
+        },
       };
     })
   );
@@ -150,25 +141,24 @@ const { walk, geojsonData } = Astro.props;
   }
 
   {
-    !!walk.gallery?.length && (
+    !!walk.r2Images?.length && (
       <div>
         <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mt-8 mb-4">
           Photos
         </h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="my-gallery">
-          {walk.gallery.map((image) => (
+          {walk.r2Images.map((image) => (
             <a
-              href={image.src.src}
-              data-pswp-width={image.src.width}
-              data-pswp-height={image.src.height}
+              href={image.src}
+              data-pswp-width={image.width}
+              data-pswp-height={image.height}
               data-cropped="true"
               target="_blank"
               class="aspect-square"
             >
-              <Image
-                quality={90}
-                src={image.src as ImageMetadata}
+              <img
+                src={image.src}
                 alt=""
                 class="h-full w-full rounded-lg object-cover"
               />
