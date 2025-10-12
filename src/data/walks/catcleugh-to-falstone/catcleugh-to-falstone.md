@@ -2,7 +2,6 @@
 title: "Catcleugh to Falstone"
 description: "Walk in Kielderhead and Kielder"
 slug: "catcleugh-to-falstone"
-cover: "./cover.jpg"
 date: 2025-04-02
 tags:
   - "moor"

@@ -2,7 +2,6 @@
 title: "Warkworth to Craster"
 description: "Walk along the coast"
 slug: "warkworth-to-craster"
-cover: "./cover.jpg"
 date: 2021-06-22
 length: 21
 duration: 4

@@ -2,7 +2,6 @@
 title: "Corbridge to Newcastle"
 description: "Walk along Hadrian's wall"
 slug: "corbridge-to-newcastle"
-cover: "./cover.jpg"
 date: 2024-10-27
 tags:
   - "history"

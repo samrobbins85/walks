@@ -2,7 +2,6 @@
 title: "Edale to Kinder Scout"
 description: "Walk in the Peak District"
 slug: "edale-to-kinder-scout"
-cover: "./cover.jpg"
 date: 2022-04-18
 length: 15
 elevation: 610

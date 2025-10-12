@@ -2,7 +2,6 @@
 title: "Bardon Mill to Hexham"
 description: "Walk along hadrian's wall"
 slug: "bardon-mill-to-hexham"
-cover: "./cover.jpg"
 date: 2024-09-06
 tags:
   - "history"

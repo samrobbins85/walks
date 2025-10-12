@@ -2,7 +2,6 @@
 title: "Prudhoe to Hexham"
 description: "Walk along the tyne"
 slug: "prudhoe-to-hexham"
-cover: "./cover.jpg"
 date: 2024-09-29
 tags:
   - "river"

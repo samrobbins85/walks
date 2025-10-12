@@ -11,7 +11,6 @@ const walks = defineCollection({
       title: z.string(),
       slug: z.string(),
       description: z.string(),
-      cover: image(),
       date: z.date(),
       trails: z.array(reference("trails")).optional(),
       tags: z.array(reference("tags")).optional(),
@@ -22,7 +21,6 @@ const walks = defineCollection({
         .array(z.object({ name: z.string(), icon: z.string() }))
         .optional(),
       peaks: z.array(reference("peaks")).optional(),
-      gallery: z.array(image()).optional(),
     }),
 });
 

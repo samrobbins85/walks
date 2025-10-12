@@ -2,7 +2,6 @@
 title: "Hexham to Blanchland and back"
 description: "Walk along devil's water"
 slug: "hexham-to-blanchland"
-cover: "./cover.jpg"
 date: 2025-08-10
 length: 40
 duration: 8

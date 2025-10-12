@@ -2,7 +2,6 @@
 title: "Hexham to Haltwhistle"
 description: "Walk along hadrian's wall"
 slug: "hexham-to-haltwhistle"
-cover: "./cover.jpg"
 date: 2025-08-25
 tags:
   - "history"

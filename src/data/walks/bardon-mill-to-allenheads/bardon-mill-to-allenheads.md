@@ -2,7 +2,6 @@
 title: "Bardon Mill to Allenheads"
 description: "Walk along the east allen"
 slug: "bardon-mill-to-allenheads"
-cover: "./cover.jpg"
 date: 2025-03-15
 tags:
   - "forest"

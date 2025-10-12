@@ -2,7 +2,6 @@
 title: "Seahouses to Waren Mill"
 description: "Walk along the coast"
 slug: "seahouses-to-waren-mill"
-cover: "./cover.jpg"
 date: 2021-07-15
 length: 11.2
 duration: 2

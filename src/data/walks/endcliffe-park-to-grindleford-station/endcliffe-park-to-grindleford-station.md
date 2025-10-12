@@ -2,7 +2,6 @@
 title: "Endcliffe park to Grindleford Station"
 description: "Walk from Sheffield"
 slug: "endcliffe-park-to-grindleford-station"
-cover: "./cover.jpg"
 date: 2022-04-16
 tags:
   - "moor"

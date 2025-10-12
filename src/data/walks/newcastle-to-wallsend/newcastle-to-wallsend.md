@@ -2,7 +2,6 @@
 title: "Newcastle to Wallsend"
 description: "Walk to the end of Hadrian's wall"
 slug: "newcastle-to-wallsend"
-cover: "./cover.jpg"
 date: 2024-11-04
 tags:
   - "history"

@@ -2,7 +2,6 @@
 title: "Byrness to Wooler"
 description: "Walk along the border ridge"
 slug: "byrness-to-wooler"
-cover: "./cover.jpg"
 date: 2024-10-05
 tags:
   - "hills"

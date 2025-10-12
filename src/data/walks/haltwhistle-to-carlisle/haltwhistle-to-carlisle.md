@@ -2,7 +2,6 @@
 title: "Haltwhistle to Carlisle"
 description: "Walk along Hadrian's wall"
 slug: "haltwhistle-to-carlisle"
-cover: "./cover.jpg"
 date: 2024-09-16
 tags:
   - "history"

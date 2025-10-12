@@ -2,7 +2,6 @@
 title: "Bellingham to Haltwhistle"
 description: "Walk along the pennine way"
 slug: "bellingham-to-haltwhistle"
-cover: "./cover.jpg"
 date: 2024-08-24
 tags:
   - "history"

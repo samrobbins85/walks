@@ -2,7 +2,6 @@
 title: "Fenwick to Hethpool"
 description: "Walk via St Cuthberts Cave"
 slug: "fenwick-to-hethpool"
-cover: "./cover.jpg"
 date: 2024-10-13
 tags:
   - "hills"

@@ -2,7 +2,6 @@
 title: "Blaydon to Corbridge"
 description: "Walk along the tyne"
 slug: "blaydon-to-corbridge"
-cover: "./cover.jpg"
 date: 2025-04-27
 tags:
   - "river"

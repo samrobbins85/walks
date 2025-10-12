@@ -2,7 +2,6 @@
 title: "Haltwhistle to Hexham"
 description: "Walk along the type"
 slug: "haltwhistle-to-hexham"
-cover: "./cover.jpg"
 date: 2025-06-29
 tags:
   - "river"

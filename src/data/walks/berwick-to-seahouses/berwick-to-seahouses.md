@@ -2,7 +2,6 @@
 title: "Berwick to Seahouses"
 description: "Walk along the coast"
 slug: "berwick-to-seahouses"
-cover: "./cover.jpg"
 date: 2025-04-11
 tags:
   - "coast"

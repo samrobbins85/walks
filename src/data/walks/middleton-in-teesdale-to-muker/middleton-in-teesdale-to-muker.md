@@ -2,7 +2,6 @@
 title: "Middleton-in-Teesdale to Muker"
 description: "Walk along the pennine way"
 slug: "middleton-in-teesdale-to-muker"
-cover: "./cover.jpg"
 date: 2025-07-28
 tags:
   - "moor"

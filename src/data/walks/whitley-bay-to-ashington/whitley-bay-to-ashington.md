@@ -2,7 +2,6 @@
 title: "Whitley Bay to Ashington"
 description: "Walk along the coast"
 slug: "whitley-bay-to-ashington"
-cover: "./cover.jpg"
 date: 2025-01-25
 tags:
   - "coast"

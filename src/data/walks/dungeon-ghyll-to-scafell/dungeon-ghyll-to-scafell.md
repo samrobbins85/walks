@@ -2,7 +2,6 @@
 title: "Dungeon Ghyll to Scafell Pike"
 description: "Walk from Langdale"
 slug: "dungeon-ghyll-to-scafell"
-cover: "./cover.jpg"
 date: 2022-05-24
 tags:
   - "lake"

@@ -2,7 +2,6 @@
 title: "Hexham to Allendale via Blanchland"
 description: "Walk in the North Pennines"
 slug: "hexham-blanchland-allendale"
-cover: "./cover.jpg"
 date: 2025-04-30
 length: 37.5
 duration: 7.5

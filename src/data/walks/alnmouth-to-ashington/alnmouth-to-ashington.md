@@ -2,7 +2,6 @@
 title: "Alnmouth to Ashington"
 description: "Walk along the coast"
 slug: "alnmouth-to-ashington"
-cover: "./cover.jpg"
 date: 2025-05-31
 tags:
   - "coast"

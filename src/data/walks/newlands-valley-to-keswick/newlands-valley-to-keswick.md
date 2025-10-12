@@ -2,7 +2,6 @@
 title: "Newlands valley to Keswick"
 description: "Walk over Catbells"
 slug: "newlands-valley-to-keswick"
-cover: "./cover.jpg"
 date: 2022-08-27
 length: 22.3
 duration: 5

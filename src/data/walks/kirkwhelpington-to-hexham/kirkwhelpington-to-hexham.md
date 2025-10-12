@@ -2,7 +2,6 @@
 title: "Kirkwhelpington to Hexham"
 description: "Walk along St Oswald's way"
 slug: "kirkwhelpington-to-hexham"
-cover: "./cover.jpg"
 date: 2024-08-16
 length: 34.68
 duration: 7

@@ -2,7 +2,6 @@
 title: "Haltwhistle loop"
 description: "Loop via Hadrian's wall and the South Tyne Valley"
 slug: "haltwhistle-loop"
-cover: "./cover.jpg"
 date: 2025-07-12
 tags:
   - "river"

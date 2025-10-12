@@ -2,7 +2,6 @@
 title: "Longhorsley to Warkworth"
 description: "Walk along the coquet"
 slug: "longhorsley-to-warkworth"
-cover: "./cover.jpg"
 date: 2021-06-02
 tags:
   - "river"

@@ -2,7 +2,6 @@
 title: "Carlisle to Bowness on Solway"
 description: "Walk to the end of Hadrian's wall"
 slug: "carlisle-to-bowness-on-solway"
-cover: "./cover.jpg"
 date: 2024-09-21
 tags:
   - "coast"

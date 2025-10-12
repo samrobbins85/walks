@@ -2,7 +2,6 @@
 title: "Berwick to Etal"
 description: "Walk along the lower tweed"
 slug: "berwick-to-etal"
-cover: "./cover.jpg"
 date: 2025-05-10
 tags:
   - "history"

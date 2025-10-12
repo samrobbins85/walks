@@ -2,7 +2,6 @@
 title: "Craster to Seahouses"
 description: "Walk along the coast"
 slug: "craster-to-seahouses"
-cover: "./cover.jpg"
 date: 2021-07-02
 tags:
   - "coast"

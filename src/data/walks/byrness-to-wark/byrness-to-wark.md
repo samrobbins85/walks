@@ -2,7 +2,6 @@
 title: "Byrness to Wark"
 description: "Walk along the Pennine Way"
 slug: "byrness-to-wark"
-cover: "./cover.jpg"
 date: 2024-08-10
 tags:
   - "moor"

@@ -2,7 +2,6 @@
 title: "Muker to Hawes"
 description: "Walk over Shunner Fell"
 slug: "muker-to-hawes"
-cover: "./cover.jpg"
 date: 2025-08-02
 tags:
   - "hills"

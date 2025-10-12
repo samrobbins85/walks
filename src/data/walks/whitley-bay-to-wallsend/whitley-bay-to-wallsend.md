@@ -2,7 +2,6 @@
 title: "Whitley Bay to Wallsend"
 description: "Walk along the coast"
 slug: "whitley-bay-to-wallsend"
-cover: "./cover.jpg"
 date: 2025-08-24
 tags:
   - "coast"

@@ -2,7 +2,6 @@
 title: "Berwick to St Abbs"
 description: "Walk along the coast"
 slug: "berwick-to-st-abbs"
-cover: "./cover.jpg"
 date: 2025-08-11
 tags:
   - "coast"

@@ -2,7 +2,6 @@
 title: "Haltwhistle to Alston"
 description: "Walk in South Tynedale"
 slug: "haltwhistle-to-alston"
-cover: "./cover.jpg"
 date: 2024-08-03
 tags:
   - "river"

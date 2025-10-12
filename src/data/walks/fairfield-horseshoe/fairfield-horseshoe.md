@@ -2,7 +2,6 @@
 title: "Fairfield Horseshoe"
 description: "Walk from Ambleside"
 slug: "fairfield-horseshoe"
-cover: "./cover.jpg"
 date: 2023-06-02
 length: 17.5
 duration: 5

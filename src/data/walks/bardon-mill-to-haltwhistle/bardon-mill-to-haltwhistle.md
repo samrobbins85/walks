@@ -2,7 +2,6 @@
 title: "Bardon Mill to Haltwhistle"
 description: "Walk along hadrian's wall"
 slug: "bardon-mill-to-haltwhistle"
-cover: "./cover.jpg"
 date: 2025-01-12
 tags:
   - "history"
