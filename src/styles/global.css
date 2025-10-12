@@ -24,13 +24,13 @@
   padding: 8px;
   width: 90px;
   height: 24px;
-  background-image: url(./img/os-logo-maps.svg);
+  background-image: url(/img/os-logo-maps.svg);
   background-position: center;
   background-repeat: no-repeat;
   box-sizing: content-box;
 }
 .os-api-branding.logo.white {
-  background-image: url(./img/os-logo-maps-white.svg);
+  background-image: url(/img/os-logo-maps-white.svg);
 }
 
 .highlight-icon symbol * {
