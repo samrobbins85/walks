@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import FormattedDate from "./common/FormattedDate.astro";
 import { Icon } from "astro-icon/components";
 import { getCover } from "../utils/getImages";
@@ -11,13 +10,7 @@ const cover = await getCover(walk.data.slug);
   href={`/walks/${walk.data.slug}`}
   class="border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col group"
 >
-  <Image
-    src={cover.src}
-    height={parseInt(cover.height)}
-    width={parseInt(cover.width)}
-    alt=""
-    class="aspect-4/3 object-cover mb-2 w-full"
-  />
+  <img src={cover.src} alt="" class="aspect-4/3 object-cover mb-2 w-full" />
 
   <div class="flex flex-col p-4 justify-between grow group-hover:bg-slate-50">
     <span class="font-medium text-lg h-16 line-clamp-2">{walk.data.title}</span>

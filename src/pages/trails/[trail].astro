@@ -3,7 +3,6 @@ import type { GetStaticPaths } from "astro";
 import { getTrails } from "../../utils/getTrails";
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
 import WalkCard from "../../components/walkCard.astro";
 
 export const getStaticPaths = (async () => {
@@ -60,8 +59,8 @@ const { trail } = Astro.props;
       }
     </div>
     <div class="hidden md:block">
-      <Image
-        src={trail.cover as any}
+      <img
+        src={trail.cover.src as any}
         alt=""
         class="w-full aspect-4/3 object-cover rounded-lg"
       />

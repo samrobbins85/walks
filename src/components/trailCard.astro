@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
 
 const { trail } = Astro.props;
 const percentComplete = Math.round(
@@ -12,13 +11,7 @@ const percentComplete = Math.round(
   href={`/trails/${trail.id}`}
   class="border border-slate-200 rounded-lg overflow-hidden"
 >
-  <Image
-    src={trail.cover.src}
-    width={trail.cover.width}
-    height={trail.cover.height}
-    alt=""
-    class="h-72 object-cover"
-  />
+  <img src={trail.cover.src} alt="" class="h-72 object-cover w-full" />
   <div class="flex flex-col p-6">
     <span class="text-xl font-medium">{trail.data.name}</span>
     <span class="text-slate-500 line-clamp-2 h-16"
