@@ -1,27 +1,43 @@
 import { defineCollection, reference, z } from "astro:content";
 
-// 2. Import loader(s)
 import { glob } from "astro/loaders";
 
-// 3. Define your collection(s)
 const walks = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/walks" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      slug: z.string(),
-      description: z.string(),
-      date: z.date(),
-      trails: z.array(reference("trails")).optional(),
-      tags: z.array(reference("tags")).optional(),
-      length: z.number(),
-      elevation: z.number(),
-      duration: z.number(),
-      highlights: z
-        .array(z.object({ name: z.string(), icon: z.string() }))
-        .optional(),
-      peaks: z.array(reference("peaks")).optional(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    date: z.date(),
+    trails: z.array(reference("trails")).optional(),
+    tags: z.array(reference("tags")).optional(),
+    length: z.number(),
+    elevation: z.number(),
+    duration: z.number(),
+    highlights: z
+      .array(z.object({ name: z.string(), icon: z.string() }))
+      .optional(),
+    peaks: z.array(reference("peaks")).optional(),
+  }),
+});
+
+const weather = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/data/weather" }),
+  schema: z.object({
+    image: z.string(),
+    label: z.string(),
+  }),
+});
+
+const logs = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/data/logs" }),
+  schema: z.object({
+    date: z.date(),
+    walk: reference("walks"),
+    duration: z.number(),
+    temperature: z.number(),
+    weather: reference("weather"),
+  }),
 });
 
 const trails = defineCollection({
@@ -74,4 +90,6 @@ export const collections = {
   tags,
   peaks,
   peakCollections,
+  logs,
+  weather,
 };

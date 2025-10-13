@@ -50,21 +50,19 @@ const routes = rawRoutes.map((route) => ({
 
   let combinedBounds = L.latLngBounds([]);
 
-  shuffle(routes).forEach((route, index) => {
+  shuffle(routes).forEach((route) => {
     const layer = L.geoJSON(route.geojson, {
       style: {
         color: route.color,
         weight: 3,
       },
-      onEachFeature: function (feature, layer) {
-        // You can customize the tooltip text here
+      onEachFeature: function (_feature, layer) {
         const tooltipText = route.title;
 
-        // Bind the tooltip to the layer
         layer.bindTooltip(tooltipText, {
-          permanent: false, // Only show on hover
-          direction: "auto", // Let Leaflet decide where to position the tooltip
-          sticky: true, // Tooltip follows the cursor
+          permanent: false,
+          direction: "auto",
+          sticky: true,
         });
 
         layer.on("click", () => {

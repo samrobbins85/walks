@@ -1,0 +1,93 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { getEntry } from "astro:content";
+import FormattedDate from "../components/common/FormattedDate.astro";
+const logs = await getCollection("logs");
+const logEntries = await Promise.all(
+  logs.map(async (log) => {
+    const walk = await getEntry(log.data.walk);
+    const weather = await getEntry(log.data.weather);
+
+    return { ...log, data: { ...log.data, walk, weather } };
+  })
+);
+
+function hoursToHM(decimalHours) {
+  let totalMinutes = Math.round(Math.abs(decimalHours) * 60);
+
+  const h = Math.floor(totalMinutes / 60);
+  const m = totalMinutes % 60;
+
+  return `${h}h` + (m > 0 ? ` ${m}m` : "");
+}
+---
+
+<Layout>
+  <div class="pt-6">
+    <h1 class="text-2xl font-light mb-6">Log</h1>
+
+    <table class="relative min-w-full w-full divide-y divide-gray-300">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+            >Date</th
+          >
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >Route</th
+          >
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >Duration</th
+          >
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >Temperature</th
+          >
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >Weather</th
+          >
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        {
+          logEntries
+            .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+            .map((log) => (
+              <tr>
+                <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-gray-500 sm:pl-0">
+                  <FormattedDate date={log.data.date} />
+                </td>
+                <td class="px-3 py-4 text-sm whitespace-nowrap ">
+                  <a
+                    href={`/walks/${log.data.walk.data.slug}`}
+                    class="underline font-medium text-black"
+                  >
+                    {log.data.walk.data.title}
+                  </a>
+                </td>
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
+                  {hoursToHM(log.data.duration)}
+                </td>
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
+                  {log.data.temperature}℃
+                </td>
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 flex items-center gap-x-2">
+                  <img src={log.data.weather.data.image} class="size-8" />{" "}
+                  {log.data.weather.data.label}
+                </td>
+              </tr>
+            ))
+        }
+      </tbody>
+    </table>
+  </div>
+</Layout>

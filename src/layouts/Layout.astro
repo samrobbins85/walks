@@ -40,6 +40,13 @@ const activePath = pathname
           </li>
           <li>
             <a
+              href="/log"
+              class="text-gray-500 hover:text-gray-900 aria-[current=page]:text-green-600"
+              aria-current={activePath === "log" ? "page" : "false"}>Log</a
+            >
+          </li>
+          <li>
+            <a
               href="/trails"
               aria-current={activePath === "trails" ? "page" : "false"}
               class="text-gray-500 hover:text-gray-900 aria-[current=page]:text-green-600"
