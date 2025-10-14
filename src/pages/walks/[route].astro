@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntries } from "astro:content";
+import { getCollection, getEntries, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Map from "../../components/map.astro";
 import Tag from "../../components/common/tag.astro";
@@ -8,9 +8,11 @@ import { roundToQuarter } from "../../utils/rounding";
 import "photoswipe/style.css";
 import FormattedDate from "../../components/common/FormattedDate.astro";
 import getImages from "../../utils/getImages";
+import { hoursToHM } from "../../utils/time";
 
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
+  const logs = await getCollection("logs");
   const paths = await Promise.all(
     walks.map(async (walk) => {
       const tags = walk.data?.tags ? await getEntries(walk.data.tags) : [];
@@ -34,11 +36,19 @@ export async function getStaticPaths() {
       const geojsonData: object | null = geojsonEntry
         ? geojsonEntry[1].default
         : null;
+      const relatedLogs = await Promise.all(
+        logs
+          .filter((log) => log.data.walk.id === walk.id)
+          .map(async (log) => {
+            const weather = await getEntry(log.data.weather);
+            return { ...log, data: { ...log.data, weather } };
+          })
+      );
 
       return {
         params: { route: walk.data.slug },
         props: {
-          walk: { ...walk, tags, trails, r2Images },
+          walk: { ...walk, tags, trails, r2Images, relatedLogs },
           geojsonData,
         },
       };
@@ -168,6 +178,59 @@ const { walk, geojsonData } = Astro.props;
       </div>
     )
   }
+  <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mt-8">
+    Logs
+  </h2>
+  <div class="overflow-x-auto">
+    <table class="relative min-w-max w-full divide-y divide-gray-300">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+            >Date</th
+          >
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >Duration</th
+          >
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >Temperature</th
+          >
+          <th scope="col" class="px-3 py-3.5 text-left text-sm text-gray-900"
+            >Weather</th
+          >
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        {
+          walk.relatedLogs
+            .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+            .map((log) => (
+              <tr>
+                <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-gray-500 sm:pl-0">
+                  <FormattedDate date={log.data.date} />
+                </td>
+
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
+                  {hoursToHM(log.data.duration)}
+                </td>
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
+                  {log.data.temperature}℃
+                </td>
+                <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 flex items-center gap-x-2">
+                  <img src={log.data.weather.data.image} class="size-8" />{" "}
+                  {log.data.weather.data.label}
+                </td>
+              </tr>
+            ))
+        }
+      </tbody>
+    </table>
+  </div>
 </Layout>
 
 <script>

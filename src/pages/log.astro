@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { getEntry } from "astro:content";
 import FormattedDate from "../components/common/FormattedDate.astro";
+import { hoursToHM } from "../utils/time";
 const logs = await getCollection("logs");
 const logEntries = await Promise.all(
   logs.map(async (log) => {
@@ -12,15 +13,6 @@ const logEntries = await Promise.all(
     return { ...log, data: { ...log.data, walk, weather } };
   })
 );
-
-function hoursToHM(decimalHours) {
-  let totalMinutes = Math.round(Math.abs(decimalHours) * 60);
-
-  const h = Math.floor(totalMinutes / 60);
-  const m = totalMinutes % 60;
-
-  return `${h}h` + (m > 0 ? ` ${m}m` : "");
-}
 ---
 
 <Layout>
