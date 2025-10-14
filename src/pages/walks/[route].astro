@@ -178,29 +178,35 @@ const { walk, geojsonData } = Astro.props;
       </div>
     )
   }
-  <h2 class="text-sm font-medium text-slate-400 uppercase tracking-wider mt-8">
+  <h2
+    class="text-sm font-medium text-slate-400 uppercase tracking-wider mt-8 mb-4"
+  >
     Logs
   </h2>
   <div class="overflow-x-auto">
-    <table class="relative min-w-max w-full divide-y divide-gray-300">
+    <table class="relative min-w-max w-full">
       <thead>
         <tr>
           <th
-            scope="col"
-            class="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-            >Date</th
+            scope="
+      col"
+            class="py-3.5 pr-3 pl-4 text-left text-sm font-medium text-gray-900 bg-slate-50 rounded-l-lg"
           >
+            Date
+          </th>
           <th
             scope="col"
-            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            class="px-3 py-3.5 text-left text-sm font-medium text-gray-900 bg-slate-50"
             >Duration</th
           >
           <th
             scope="col"
-            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            class="px-3 py-3.5 text-left text-sm font-medium text-gray-900 bg-slate-50"
             >Temperature</th
           >
-          <th scope="col" class="px-3 py-3.5 text-left text-sm text-gray-900"
+          <th
+            scope="col"
+            class="px-3 py-3.5 text-left text-sm font-medium text-gray-900 bg-slate-50 rounded-r-lg"
             >Weather</th
           >
         </tr>
@@ -211,7 +217,7 @@ const { walk, geojsonData } = Astro.props;
             .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
             .map((log) => (
               <tr>
-                <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-gray-500 sm:pl-0">
+                <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-gray-500">
                   <FormattedDate date={log.data.date} />
                 </td>
 
@@ -229,27 +235,27 @@ const { walk, geojsonData } = Astro.props;
             ))
         }
       </tbody>
-    </table>
-  </div>
-</Layout>
 
-<script>
-  import PhotoSwipeLightbox from "photoswipe/lightbox";
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: "#my-gallery",
-    children: "a",
-    pswpModule: () => import("photoswipe"),
-    zoom: false,
-    padding: { top: 20, bottom: 20, left: 20, right: 20 },
-    loop: false,
-  });
-  lightbox.addFilter("domItemData", (itemData, _element, linkEl) => {
-    const imgEl = linkEl.querySelector("img");
-    if (imgEl) {
-      itemData.src = imgEl.currentSrc || imgEl.src;
-      itemData.msrc = imgEl.currentSrc || imgEl.src;
-    }
-    return itemData;
-  });
-  lightbox.init();
-</script>
+      <script>
+        import PhotoSwipeLightbox from "photoswipe/lightbox";
+        const lightbox = new PhotoSwipeLightbox({
+          gallery: "#my-gallery",
+          children: "a",
+          pswpModule: () => import("photoswipe"),
+          zoom: false,
+          padding: { top: 20, bottom: 20, left: 20, right: 20 },
+          loop: false,
+        });
+        lightbox.addFilter("domItemData", (itemData, _element, linkEl) => {
+          const imgEl = linkEl.querySelector("img");
+          if (imgEl) {
+            itemData.src = imgEl.currentSrc || imgEl.src;
+            itemData.msrc = imgEl.currentSrc || imgEl.src;
+          }
+          return itemData;
+        });
+        lightbox.init();
+      </script>
+    </table>
+  </div></Layout
+>
