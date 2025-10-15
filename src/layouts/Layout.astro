@@ -3,11 +3,6 @@ import "../styles/global.css";
 import SignPost from "../assets/signpost.svg";
 const { title } = Astro.props;
 const { pathname } = Astro.url;
-const base = import.meta.env.BASE_URL;
-
-const activePath = pathname
-  .replace(new RegExp(`^${base}`), "")
-  .replace(/^\/|\/$/g, "");
 ---
 
 <!doctype html>
@@ -35,20 +30,22 @@ const activePath = pathname
             <a
               href="/walks"
               class="text-gray-500 hover:text-gray-900 aria-[current=page]:text-green-600"
-              aria-current={activePath === "walks" ? "page" : "false"}>Walks</a
+              aria-current={pathname.startsWith("/walks") ? "page" : "false"}
+              >Walks</a
             >
           </li>
           <li>
             <a
               href="/log"
               class="text-gray-500 hover:text-gray-900 aria-[current=page]:text-green-600"
-              aria-current={activePath === "log" ? "page" : "false"}>Log</a
+              aria-current={pathname.startsWith("/log") ? "page" : "false"}
+              >Log</a
             >
           </li>
           <li>
             <a
               href="/trails"
-              aria-current={activePath === "trails" ? "page" : "false"}
+              aria-current={pathname.startsWith("/trails") ? "page" : "false"}
               class="text-gray-500 hover:text-gray-900 aria-[current=page]:text-green-600"
               >Trails</a
             >
