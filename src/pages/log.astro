@@ -4,6 +4,8 @@ import Layout from "../layouts/Layout.astro";
 import { getEntry } from "astro:content";
 import FormattedDate from "../components/common/FormattedDate.astro";
 import { hoursToHM } from "../utils/time";
+import { Icon } from "astro-icon/components";
+import LogPage from "../components/log.svelte";
 const logs = await getCollection("logs");
 const logEntries = await Promise.all(
   logs.map(async (log) => {
@@ -13,12 +15,70 @@ const logEntries = await Promise.all(
     return { ...log, data: { ...log.data, walk, weather } };
   })
 );
+
+const clientLogs = logEntries.map((l) => ({
+  date: l.data.date.toISOString(),
+  distance: Number(l.data.walk.data.length),
+}));
 ---
 
 <Layout>
-  <div class="pt-6">
-    <h1 class="text-2xl font-light mb-6">Log</h1>
-    <div class="overflow-x-auto">
+  <!-- <div
+    class="pt-6"
+    x-data="{tab: 'analytics', range: 'all-time', logs: [],
+    get cutoff() {
+      const d = new Date();
+      d.setFullYear(d.getFullYear() - 1); 
+      return d;
+    },
+    get filtered() { return this.range==='all-time' ? this.logs : this.logs.filter(l => new Date(l.date) >= this.cutoff) },
+    get totalDistance() { return this.filtered.reduce((s, l) => s + (Number.isFinite(l.distance) ? l.distance : 0), 0) }
+  }"
+    x-init="logs = JSON.parse($el.dataset.logs)"
+    data-logs={JSON.stringify(clientLogs)}
+  >
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-light mb-2">Log</h1>
+      <div class="flex gap-x-4 justify-end">
+        <div class="flex p-1 bg-gray-50 rounded-lg gap-x-4">
+          <button
+            class="rounded-lg px-2 py-1 flex items-center gap-x-2"
+            :class="tab=='table' ? 'bg-gray-200': 'bg-gray-100'"
+            x-on:click="tab='table'"
+          >
+            <Icon name="lucide:table" class="size-4" />
+
+            Table</button
+          >
+          <button
+            class="border-l-0 rounded-lg px-2 py-1 flex items-center gap-x-2"
+            :class="tab=='analytics' ? 'bg-gray-200': 'bg-gray-100'"
+            x-on:click="tab='analytics'"
+          >
+            <Icon name="lucide:bar-chart-3" class="size-4" />
+            Analytics</button
+          >
+        </div>
+
+        <div class="flex p-1 bg-gray-50 rounded-lg gap-x-4">
+          <button
+            class="rounded-lg px-2 py-1 flex items-center gap-x-2"
+            :class="range=='all-time' ? 'bg-gray-200': 'bg-gray-100'"
+            x-on:click="range='all-time'"
+          >
+            All time</button
+          >
+          <button
+            class="border-l-0 rounded-lg px-2 py-1 flex items-center gap-x-2"
+            :class="range=='12-months' ? 'bg-gray-200': 'bg-gray-100'"
+            x-on:click="range='12-months'"
+          >
+            Past 12 months</button
+          >
+        </div>
+      </div>
+    </div>
+    <div class="overflow-x-auto" x-show="tab=='table'">
       <table class="relative min-w-max w-full divide-y divide-gray-300">
         <thead>
           <tr>
@@ -59,7 +119,10 @@ const logEntries = await Promise.all(
             logEntries
               .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
               .map((log) => (
-                <tr>
+                <tr
+                  x-show="range === 'all-time' || new Date($el.dataset.date) >= cutoff"
+                  data-date={log.data.date.toISOString()}
+                >
                   <td class="py-4 pr-3 pl-4 text-sm whitespace-nowrap text-gray-500 sm:pl-0">
                     <FormattedDate date={log.data.date} />
                   </td>
@@ -90,5 +153,10 @@ const logEntries = await Promise.all(
         </tbody>
       </table>
     </div>
-  </div>
+    <div x-show="tab='analytics'">
+      <div x-text="totalDistance.toFixed(1)"></div>
+    </div>
+  </div> -->
+
+  <LogPage client:only logEntries={logEntries} />
 </Layout>
