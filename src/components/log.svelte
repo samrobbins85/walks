@@ -5,6 +5,7 @@
   import { Chart, Svg, Axis, Bars, Tooltip } from "layerchart";
   import { scaleBand } from "d3-scale";
   import { format, PeriodType } from "@layerstack/utils";
+  import StatCard from "./statCard.svelte";
   let { logEntries } = $props();
   let timeFilter = $state("all-time");
   let display = $state("table");
@@ -58,7 +59,6 @@
       grouped[key].distance += entry.data.walk.data.length;
     });
 
-    // Convert to array and sort by date
     return Object.values(grouped).sort((a, b) => a.date - b.date);
   });
 
@@ -86,10 +86,10 @@
 </script>
 
 <div class="pt-6">
-  <div class="flex justify-between flex-wrap">
-    <h1 class="text-2xl font-light mb-2">Log</h1>
+  <div class="flex justify-between flex-wrap items-center">
+    <h1 class="text-4xl font-light mb-2">Log</h1>
     <div class="flex gap-4 flex-wrap">
-      <div class="bg-gray-50 p-1 flex rounded-lg">
+      <div class="bg-gray-50 p-1 flex rounded-xl">
         <button
           onclick={() => (timeFilter = "all-time")}
           class={`rounded-lg px-2 py-1 flex items-center gap-x-2 ${timeFilter === "all-time" ? "bg-gray-200" : ""}`}
@@ -106,14 +106,14 @@
           onclick={() => (display = "table")}
           class={`rounded-lg px-2 py-1 flex items-center gap-x-2 ${display === "table" ? "bg-gray-200" : ""}`}
         >
-          <TableIcon />
+          <TableIcon class="size-4" />
           Table</button
         >
         <button
           onclick={() => (display = "analytics")}
           class={`rounded-lg px-2 py-1 flex items-center gap-x-2 ${display === "analytics" ? "bg-gray-200" : ""}`}
         >
-          <ChartColumn />
+          <ChartColumn class="size-4" />
           Analytics</button
         >
       </div>
@@ -198,33 +198,14 @@
     </div>
   {:else}
     <div>
-      <div class="grid md:grid-cols-4 gap-6 mt-4">
-        <div
-          class="flex flex-col-reverse border px-6 py-4 border-slate-200 rounded-lg"
-        >
-          <span class="text-2xl font-medium">{totalDistance} km</span>
-          <span class="text-slate-500">Total distance</span>
-        </div>
-        <div
-          class="flex flex-col-reverse border px-6 py-4 border-slate-200 rounded-lg"
-        >
-          <span class="text-2xl font-medium">{sortedEntries.length}</span>
-          <span class="text-slate-500">Walks</span>
-        </div>
-        <div
-          class="flex flex-col-reverse border px-6 py-4 border-slate-200 rounded-lg"
-        >
-          <span class="text-2xl font-medium">{totalAscent} m</span>
-          <span class="text-slate-500">Total ascent</span>
-        </div>
-        <div
-          class="flex flex-col-reverse border px-6 py-4 border-slate-200 rounded-lg"
-        >
-          <span class="text-2xl font-medium"
-            >{Math.round(totalDistance / sortedEntries.length)} km</span
-          >
-          <span class="text-slate-500">Average distance</span>
-        </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+        <StatCard label="Total distance" value={`${totalDistance} km`} />
+        <StatCard label="Walks" value={sortedEntries.length} />
+        <StatCard label="Total ascent" value={`${totalAscent} m`} />
+        <StatCard
+          label="Average distance"
+          value={`${Math.round(totalDistance / sortedEntries.length)} km`}
+        />
       </div>
       <div class="overflow-x-auto">
         <div
@@ -247,7 +228,7 @@
             <Svg>
               <Axis placement="left" grid rule />
               <Axis placement="bottom" format={(d) => formatDate(d)} rule />
-              <Bars class="fill-emerald-600" />
+              <Bars class="fill-[#a3be8c]" />
             </Svg>
             <Tooltip.Root>
               {#snippet children({ data })}
