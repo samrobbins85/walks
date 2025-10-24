@@ -61,6 +61,28 @@
     // Convert to array and sort by date
     return Object.values(grouped).sort((a, b) => a.date - b.date);
   });
+
+  const formatDate = (date) => {
+    console.log(date);
+    const formatted = format(
+      date,
+      timeFilter === "12-months"
+        ? PeriodType.MonthYear
+        : PeriodType.CalendarYear,
+      { variant: timeFilter === "12-months" ? "short" : "long" }
+    );
+    console.log(formatted);
+    return formatted;
+  };
+
+  const desiredBarWidth = 40;
+  const bandPadding = 0.4;
+
+  const widthPerPoint = desiredBarWidth / (1 - bandPadding);
+
+  const minChartWidth = $derived(
+    Math.max(600, chartData.length * widthPerPoint)
+  );
 </script>
 
 <div class="pt-6">
@@ -204,34 +226,42 @@
           <span class="text-slate-500">Average distance</span>
         </div>
       </div>
-      <div class="h-[300px] p-4 border border-slate-200 rounded-lg mt-4 z-10">
-        <Chart
-          data={chartData}
-          x="date"
-          xScale={scaleBand().padding(0.4)}
-          y="distance"
-          yDomain={[0, null]}
-          yNice={4}
-          padding={{ top: 20, left: 20, right: 20, bottom: 20 }}
-          tooltip={{ mode: "band" }}
+      <div class="overflow-x-auto">
+        <div
+          class="h-[300px] p-4 border border-slate-200 rounded-lg mt-4 z-10"
+          style="min-width: {minChartWidth}px;"
         >
-          <Svg>
-            <Axis placement="left" grid rule />
-            <Axis
-              placement="bottom"
-              format={(d) =>
-                format(
-                  d,
-                  timeFilter === "12-months"
-                    ? PeriodType.MonthYear
-                    : PeriodType.CalendarYear,
-                  { variant: timeFilter === "12-months" ? "short" : "long" }
-                )}
-              rule
-            />
-            <Bars strokeWidth={1} class="fill-primary" />
-          </Svg>
-        </Chart>
+          <Chart
+            data={chartData}
+            x="date"
+            xScale={scaleBand().padding(0.4)}
+            y="distance"
+            yDomain={[0, null]}
+            yNice={4}
+            padding={{ top: 20, left: 20, right: 20, bottom: 20 }}
+            tooltip={{
+              mode: "band",
+              touchEvents: "auto",
+            }}
+          >
+            <Svg>
+              <Axis placement="left" grid rule />
+              <Axis placement="bottom" format={(d) => formatDate(d)} rule />
+              <Bars class="fill-emerald-600" />
+            </Svg>
+            <Tooltip.Root>
+              {#snippet children({ data })}
+                <Tooltip.Header value={formatDate(data.date)} />
+                <Tooltip.List>
+                  <Tooltip.Item
+                    label="Distance"
+                    value={`${Math.round(data.distance)} km`}
+                  />
+                </Tooltip.List>
+              {/snippet}
+            </Tooltip.Root>
+          </Chart>
+        </div>
       </div>
     </div>
   {/if}
