@@ -9,13 +9,15 @@ import icon from "astro-icon";
 
 import alpinejs from "@astrojs/alpinejs";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
-  integrations: [react(), icon(), alpinejs()],
+  site: "https://walks.samrobbins.uk",
+  integrations: [react(), icon(), alpinejs(), sitemap()],
   experimental: {
     fonts: [
       {
