@@ -12,7 +12,8 @@
   const month12Filter = (item) => {
     const now = new Date();
     const twelveMonthsAgo = new Date();
-    twelveMonthsAgo.setMonth(now.getMonth() - 12);
+    twelveMonthsAgo.setDate(1);
+    twelveMonthsAgo.setMonth(now.getMonth() - 11);
     return item.data.date >= twelveMonthsAgo;
   };
 
