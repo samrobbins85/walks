@@ -219,14 +219,14 @@
             y="distance"
             yDomain={[0, null]}
             yNice={4}
-            padding={{ top: 20, left: 20, right: 20, bottom: 20 }}
+            padding={{ top: 20, left: 40, right: 20, bottom: 20 }}
             tooltip={{
               mode: "band",
               touchEvents: "auto",
             }}
           >
             <Svg>
-              <Axis placement="left" grid rule />
+              <Axis placement="left" grid rule label="Distance (km)" />
               <Axis placement="bottom" format={(d) => formatDate(d)} rule />
               <Bars class="fill-[#a3be8c]" />
             </Svg>
