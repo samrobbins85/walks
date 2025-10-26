@@ -3,6 +3,7 @@
 
 @theme {
   --font-sans: "Inter";
+  --color-nord14: #a3be8c;
 }
 
 @media (width < 40rem) {

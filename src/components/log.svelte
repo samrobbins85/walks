@@ -220,7 +220,7 @@
             <Svg>
               <Axis placement="left" grid rule label="Distance (km)" />
               <Axis placement="bottom" format={dateFormat} rule />
-              <Bars class="fill-[#a3be8c]" />
+              <Bars class="fill-nord14" />
             </Svg>
             <Tooltip.Root>
               {#snippet children({ data })}
