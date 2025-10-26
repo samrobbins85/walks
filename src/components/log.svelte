@@ -1,88 +1,79 @@
-<script>
+<script lang="ts">
   import { ChartColumn, TableIcon } from "@lucide/svelte";
   import { hoursToHM } from "../utils/time";
   import FormatDate from "./common/formatDate.svelte";
   import { Chart, Svg, Axis, Bars, Tooltip } from "layerchart";
   import { scaleBand } from "d3-scale";
-  import { format, PeriodType } from "@layerstack/utils";
   import StatCard from "./statCard.svelte";
+  import { timeMonth, timeYear } from "d3-time";
+
   let { logEntries } = $props();
   let timeFilter = $state("all-time");
   let display = $state("table");
+  const isMonthly = $derived(timeFilter === "12-months");
+
   const month12Filter = (item) => {
-    const now = new Date();
     const twelveMonthsAgo = new Date();
-    twelveMonthsAgo.setDate(1);
-    twelveMonthsAgo.setMonth(now.getMonth() - 11);
+    twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 11, 1);
     return item.data.date >= twelveMonthsAgo;
   };
 
   const sortedEntries = $derived(
     logEntries
       .toSorted((a, b) => b.data.date.getTime() - a.data.date.getTime())
-      .filter(timeFilter === "12-months" ? month12Filter : () => true)
+      .filter(isMonthly ? month12Filter : () => true)
   );
 
-  const totalDistance = $derived(
-    Math.round(sortedEntries.reduce((p, c) => p + c.data.walk.data.length, 0))
-  );
-
-  const totalAscent = $derived(
-    Math.round(
+  const stats = $derived.by(() => {
+    const distance = Math.round(
+      sortedEntries.reduce((p, c) => p + c.data.walk.data.length, 0)
+    );
+    const ascent = Math.round(
       sortedEntries.reduce((p, c) => p + c.data.walk.data.elevation, 0)
-    )
-  );
+    );
+    return { distance, ascent, count: sortedEntries.length };
+  });
 
   const chartData = $derived.by(() => {
-    const grouped = {};
+    if (sortedEntries.length === 0) return [];
+
+    const dates = sortedEntries.map((e) => e.data.date);
+    const [minDate, maxDate] = [Math.min(...dates), Math.max(...dates)].map(
+      (d) => new Date(d)
+    );
+
+    const timeRange = isMonthly ? timeMonth : timeYear;
+    const intervals = timeRange.range(
+      timeRange.floor(minDate),
+      timeRange.ceil(maxDate)
+    );
+
+    const getKey = (date) =>
+      isMonthly
+        ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`
+        : date.getFullYear().toString();
+
+    const grouped = Object.fromEntries(
+      intervals.map((d) => [getKey(d), { date: d, distance: 0 }])
+    );
 
     sortedEntries.forEach((entry) => {
-      const date = entry.data.date;
-      let key, groupDate;
-
-      if (timeFilter === "12-months") {
-        // Group by month
-        key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
-        groupDate = new Date(date.getFullYear(), date.getMonth(), 1);
-      } else {
-        // Group by year
-        key = date.getFullYear().toString();
-        groupDate = new Date(date.getFullYear(), 0, 1);
-      }
-
-      if (!grouped[key]) {
-        grouped[key] = {
-          date: groupDate,
-          distance: 0,
-        };
-      }
-
-      grouped[key].distance += entry.data.walk.data.length;
+      grouped[getKey(entry.data.date)].distance += entry.data.walk.data.length;
     });
 
     return Object.values(grouped).sort((a, b) => a.date - b.date);
   });
 
-  const formatDate = (date) => {
-    console.log(date);
-    const formatted = format(
-      date,
-      timeFilter === "12-months"
-        ? PeriodType.MonthYear
-        : PeriodType.CalendarYear,
-      { variant: timeFilter === "12-months" ? "short" : "long" }
-    );
-    console.log(formatted);
-    return formatted;
-  };
+  const dateFormat = $derived({
+    type: isMonthly ? "month-year" : "year",
+    options: { variant: isMonthly ? "short" : "long" },
+  }) as unknown as any;
 
   const desiredBarWidth = 40;
   const bandPadding = 0.4;
 
-  const widthPerPoint = desiredBarWidth / (1 - bandPadding);
-
   const minChartWidth = $derived(
-    Math.max(600, chartData.length * widthPerPoint)
+    Math.max(600, (chartData.length * desiredBarWidth) / (1 - bandPadding))
   );
 </script>
 
@@ -200,12 +191,12 @@
   {:else}
     <div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-        <StatCard label="Total distance" value={`${totalDistance} km`} />
-        <StatCard label="Walks" value={sortedEntries.length} />
-        <StatCard label="Total ascent" value={`${totalAscent} m`} />
+        <StatCard label="Total distance" value={`${stats.distance} km`} />
+        <StatCard label="Walks" value={stats.count} />
+        <StatCard label="Total ascent" value={`${stats.ascent} m`} />
         <StatCard
           label="Average distance"
-          value={`${Math.round(totalDistance / sortedEntries.length)} km`}
+          value={`${Math.round(stats.distance / stats.count)} km`}
         />
       </div>
       <div class="overflow-x-auto">
@@ -228,12 +219,12 @@
           >
             <Svg>
               <Axis placement="left" grid rule label="Distance (km)" />
-              <Axis placement="bottom" format={(d) => formatDate(d)} rule />
+              <Axis placement="bottom" format={dateFormat} rule />
               <Bars class="fill-[#a3be8c]" />
             </Svg>
             <Tooltip.Root>
               {#snippet children({ data })}
-                <Tooltip.Header value={formatDate(data.date)} />
+                <Tooltip.Header format={dateFormat} value={data.date} />
                 <Tooltip.List>
                   <Tooltip.Item
                     label="Distance"
