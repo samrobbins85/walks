@@ -1,11 +1,11 @@
 <script lang="ts">
   import { ChartColumn, TableIcon } from "@lucide/svelte";
   import { hoursToHM } from "../utils/time";
-  import FormatDate from "./common/formatDate.svelte";
   import { Chart, Svg, Axis, Bars, Tooltip } from "layerchart";
   import { scaleBand } from "d3-scale";
   import StatCard from "./statCard.svelte";
   import { timeMonth, timeYear } from "d3-time";
+  import FormatDate from "./common/formatDate.svelte";
 
   let { logEntries } = $props();
   let timeFilter = $state("all-time");

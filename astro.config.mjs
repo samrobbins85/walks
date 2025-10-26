@@ -3,8 +3,6 @@ import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
-import react from "@astrojs/react";
-
 import icon from "astro-icon";
 
 import alpinejs from "@astrojs/alpinejs";
@@ -19,7 +17,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: "https://walks.samrobbins.uk",
-  integrations: [react(), icon(), alpinejs(), sitemap(), svelte()],
+  integrations: [icon(), alpinejs(), sitemap(), svelte()],
   experimental: {
     fonts: [
       {
