@@ -10,6 +10,8 @@ duration: 6
 elevation: 795
 trails:
   - "pennine-way"
+  - "a-pennine-journey"
+  - "isaacs-tea-trail"
 highlights:
   - name: "South Tynedale Railway"
     icon: "steam-locomotive"

@@ -1,0 +1,65 @@
+---
+const { trailRoute, completedRoute } = Astro.props;
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<div>
+  <div
+    id="map"
+    style={{ height: "400px", width: "100%" }}
+    class="rounded-lg"
+    data-route={JSON.stringify(trailRoute)}
+    data-completed={JSON.stringify(completedRoute)}
+  >
+    <div class="os-api-branding logo"></div>
+  </div>
+</div>
+
+<script>
+  import L from "leaflet";
+  const mapElement = document.getElementById("map");
+
+  const map = L.map("map");
+  const route = JSON.parse(mapElement.dataset.route);
+  const completedRoute = JSON.parse(mapElement.dataset.completed);
+
+  L.tileLayer(
+    `https://api.os.uk/maps/raster/v1/zxy/Outdoor_3857/{z}/{x}/{y}.png?key=${
+      import.meta.env.PUBLIC_OS_MAPS_KEY
+    }`,
+    {
+      attribution:
+        "<span>Contains OS data &copy; Crown copyright and database rights YYYY</span>".replace(
+          "YYYY",
+          new Date().getFullYear().toString()
+        ),
+      detectRetina: false,
+    }
+  ).addTo(map);
+
+  const geoJsonLayer = L.geoJSON(route, {
+    style: {
+      color: "#424242",
+      weight: 2,
+      opacity: 0.3,
+    },
+  }).addTo(map);
+
+  L.geoJSON(completedRoute, {
+    style: {
+      color: "#E68310",
+      weight: 2,
+    },
+  }).addTo(map);
+  const bounds = geoJsonLayer.getBounds();
+
+  map.fitBounds(geoJsonLayer.getBounds());
+  map.setMinZoom(map.getZoom());
+  map.setMaxZoom(16);
+
+  map.setMaxBounds(bounds.pad(0.5));
+</script>

@@ -12,6 +12,7 @@ elevation: 915
 trails:
   - "south-tyne-trail"
   - "isaacs-tea-trail"
+  - "a-pennine-journey"
 highlights:
   - name: "Lambley Viaduct"
     icon: "mdi:bridge"
