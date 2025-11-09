@@ -9,8 +9,6 @@ tags:
 length: 34
 elevation: 540
 duration: 7
-trails:
-  - "river-tweed-trail"
 highlights:
   - name: "Royal Border Bridge"
     icon: "mdi:bridge"

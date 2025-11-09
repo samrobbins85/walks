@@ -12,6 +12,7 @@ trails:
   - "hadrians-wall"
   - "pennine-way"
   - "a-pennine-journey"
+  - "river-tyne-trail"
 highlights:
   - name: "Crag Lough"
     icon: "lake"

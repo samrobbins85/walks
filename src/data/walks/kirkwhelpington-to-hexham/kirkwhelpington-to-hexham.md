@@ -12,6 +12,7 @@ tags:
 trails:
   - "st-oswalds-way"
   - "the-way-of-light"
+  - "hadrians-wall"
 highlights:
   - name: "Great Whittington"
     icon: "lucide-lab:houses"
