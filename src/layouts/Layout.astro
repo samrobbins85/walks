@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import SignPost from "../assets/signpost.svg";
-const { title } = Astro.props;
+const { title, showCopyright } = Astro.props;
 const { pathname } = Astro.url;
 ---
 
@@ -57,16 +57,18 @@ const { pathname } = Astro.url;
       <slot />
     </main>
   </body>
-  <footer class="p-4 sm:hidden">
-    <span class="text-gray-600 text-xs text-wrap">
-      {
-        "Contains OS data © Crown copyright and database rights YYYY".replace(
-          "YYYY",
-          new Date().getFullYear().toString()
-        )
-      }
-    </span>
-  </footer>
+  {
+    showCopyright && (
+      <footer class="p-4 sm:hidden">
+        <span class="text-gray-600 text-xs text-wrap">
+          {"Contains OS data © Crown copyright and database rights YYYY".replace(
+            "YYYY",
+            new Date().getFullYear().toString()
+          )}
+        </span>
+      </footer>
+    )
+  }
 </html>
 
 <style>

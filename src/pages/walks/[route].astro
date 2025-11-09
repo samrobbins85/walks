@@ -59,7 +59,7 @@ const { walk, geojsonData } = Astro.props;
 const r2Images = await getImages(walk.data.slug);
 ---
 
-<Layout title={walk.data.title}>
+<Layout title={walk.data.title} showCopyright>
   <div class="pt-6">
     <div class="">
       <div class="flex justify-between gap-4">
