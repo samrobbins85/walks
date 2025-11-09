@@ -201,7 +201,7 @@ const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
                   {trail.percentComplete === 100 ? "Completed" : "In progress"}
                 </span>
 
-                <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden flex-1 sm:min-w-32 max-w-52">
+                <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden flex-1 min-w-24 max-w-52">
                   <div
                     class={`h-full transition-all duration-300 ${trail.percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
                     style={`width: ${trail.percentComplete}%;`}
