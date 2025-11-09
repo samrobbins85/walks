@@ -57,6 +57,16 @@ const { pathname } = Astro.url;
       <slot />
     </main>
   </body>
+  <footer class="p-4 sm:hidden">
+    <span class="text-gray-600 text-sm text-wrap">
+      {
+        "Contains OS data © Crown copyright and database rights YYYY".replace(
+          "YYYY",
+          new Date().getFullYear().toString()
+        )
+      }
+    </span>
+  </footer>
 </html>
 
 <style>
