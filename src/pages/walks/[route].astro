@@ -137,7 +137,7 @@ const r2Images = await getImages(walk.data.slug);
               {walk.trails.map((trail) => (
                 <a
                   href={`/trails/${trail.id}`}
-                  class="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group"
+                  class="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group text-slate-600"
                 >
                   <span>{trail?.data?.name}</span>
                   <Icon name="lucide:move-right" />
