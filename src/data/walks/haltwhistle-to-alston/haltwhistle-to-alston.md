@@ -10,6 +10,7 @@ duration: 4
 elevation: 282
 trails:
   - "south-tyne-trail"
+  - "river-tyne-trail"
 highlights:
   - name: "Alston Arches"
     icon: "mdi:bridge"

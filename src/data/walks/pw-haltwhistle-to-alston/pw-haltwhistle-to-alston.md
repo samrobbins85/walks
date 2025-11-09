@@ -12,6 +12,7 @@ trails:
   - "pennine-way"
   - "a-pennine-journey"
   - "isaacs-tea-trail"
+  - "river-tyne-trail"
 highlights:
   - name: "South Tynedale Railway"
     icon: "steam-locomotive"

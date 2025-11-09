@@ -60,6 +60,4 @@ const { trailRoute, completedRoute } = Astro.props;
   map.fitBounds(geoJsonLayer.getBounds());
   map.setMinZoom(map.getZoom());
   map.setMaxZoom(16);
-
-  map.setMaxBounds(bounds.pad(0.5));
 </script>

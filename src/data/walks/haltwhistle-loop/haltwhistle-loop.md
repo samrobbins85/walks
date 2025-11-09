@@ -15,6 +15,7 @@ trails:
   - "hadrians-wall"
   - "pennine-way"
   - "a-pennine-journey"
+  - "river-tyne-trail"
 highlights:
   - name: "Haltwhistle burn"
     icon: "river"

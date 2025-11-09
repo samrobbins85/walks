@@ -24,52 +24,125 @@ export const getStaticPaths = (async () => {
   });
 }) satisfies GetStaticPaths;
 
+// function findOverlapsOnPath(
+//   completePathCollection,
+//   walksCollections,
+//   bufferKm = 1
+// ) {
+//   const completePath = completePathCollection.features[0];
+//   const mainCoords = completePath.geometry.coordinates;
+
+//   const covered = new Array(mainCoords.length).fill(false);
+
+//   walksCollections.forEach((walkCollection) => {
+//     walkCollection.features.forEach((walk) => {
+//       mainCoords.forEach((mainCoord, index) => {
+//         const mainPoint = turf.point(mainCoord);
+
+//         const isClose = walk.geometry.coordinates.some((walkCoord) => {
+//           const distance = turf.distance(mainPoint, turf.point(walkCoord), {
+//             units: "kilometers",
+//           });
+//           return distance < bufferKm;
+//         });
+
+//         if (isClose) {
+//           covered[index] = true;
+//         }
+//       });
+//     });
+//   });
+
+//   const overlaps = [];
+//   let currentSegment = [];
+
+//   mainCoords.forEach((coord, index) => {
+//     if (covered[index]) {
+//       currentSegment.push(coord);
+//     } else {
+//       if (currentSegment.length >= 2) {
+//         overlaps.push(turf.lineString(currentSegment));
+//       }
+//       currentSegment = [];
+//     }
+//   });
+
+//   if (currentSegment.length >= 2) {
+//     overlaps.push(turf.lineString(currentSegment));
+//   }
+
+//   return turf.featureCollection(overlaps);
+// }
+
 function findOverlapsOnPath(
   completePathCollection,
   walksCollections,
-  bufferKm = 0.5
+  bufferKm = 1
 ) {
-  const completePath = completePathCollection.features[0];
-  const mainCoords = completePath.geometry.coordinates;
-
-  const covered = new Array(mainCoords.length).fill(false);
-
-  walksCollections.forEach((walkCollection) => {
-    walkCollection.features.forEach((walk) => {
-      mainCoords.forEach((mainCoord, index) => {
-        const mainPoint = turf.point(mainCoord);
-
-        const isClose = walk.geometry.coordinates.some((walkCoord) => {
-          const distance = turf.distance(mainPoint, turf.point(walkCoord), {
-            units: "kilometers",
-          });
-          return distance < bufferKm;
-        });
-
-        if (isClose) {
-          covered[index] = true;
-        }
-      });
+  // 1) Collect all walk coordinates from ALL walk collections
+  const allWalkCoords = [];
+  walksCollections.forEach((coll) => {
+    coll.features.forEach((f) => {
+      if (!f?.geometry) return;
+      const { type, coordinates } = f.geometry;
+      if (type === "LineString") {
+        allWalkCoords.push(...coordinates);
+      } else if (type === "MultiLineString") {
+        coordinates.forEach((line) => allWalkCoords.push(...line));
+      } else if (type === "Point") {
+        allWalkCoords.push(coordinates);
+      }
     });
   });
 
+  // Helper: ensure we always iterate arrays of lines
+  const asLines = (feature) => {
+    const { type, coordinates } = feature.geometry;
+    if (type === "LineString") return [coordinates];
+    if (type === "MultiLineString") return coordinates;
+    return []; // ignore other geom types
+  };
+
   const overlaps = [];
-  let currentSegment = [];
 
-  mainCoords.forEach((coord, index) => {
-    if (covered[index]) {
-      currentSegment.push(coord);
-    } else {
-      if (currentSegment.length >= 2) {
-        overlaps.push(turf.lineString(currentSegment));
+  // 2) For each path feature, compute covered points & extract contiguous segments
+  completePathCollection.features.forEach((mainFeature) => {
+    if (!mainFeature?.geometry) return;
+    const lines = asLines(mainFeature);
+    lines.forEach((lineCoords) => {
+      if (!Array.isArray(lineCoords) || lineCoords.length < 2) return;
+
+      const covered = new Array(lineCoords.length).fill(false);
+
+      lineCoords.forEach((mainCoord, i) => {
+        const mainPoint = turf.point(mainCoord);
+        // 3) Close to ANY walk coordinate?
+        const isClose = allWalkCoords.some((walkCoord) => {
+          const d = turf.distance(mainPoint, turf.point(walkCoord), {
+            units: "kilometers",
+          });
+          return d < bufferKm;
+        });
+        if (isClose) covered[i] = true;
+      });
+
+      // 4) Build overlap segments (contiguous covered coords)
+      let current = [];
+      lineCoords.forEach((coord, i) => {
+        if (covered[i]) {
+          current.push(coord);
+        } else if (current.length >= 2) {
+          overlaps.push(turf.lineString(current, mainFeature.properties || {}));
+          current = [];
+        } else {
+          current = [];
+        }
+      });
+      if (current.length >= 2) {
+        overlaps.push(turf.lineString(current, mainFeature.properties || {}));
       }
-      currentSegment = [];
-    }
+    });
   });
-
-  if (currentSegment.length >= 2) {
-    overlaps.push(turf.lineString(currentSegment));
-  }
 
   return turf.featureCollection(overlaps);
 }
@@ -108,7 +181,7 @@ const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
     <div class="flex flex-col justify-center">
       <h1 class="text-4xl font-light mb-6">{trail.data.name}</h1>
       <h2>{trail.data.description}</h2>
-      <div class="flex gap-x-4 pt-2">
+      <div class="flex gap-4 pt-2 w-full items-center flex-wrap">
         <span class="flex items-center gap-x-2 text-sm text-slate-500">
           <Icon name="lucide:route" class="size-4" />
           {trail.data.length}km</span
@@ -118,34 +191,31 @@ const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
           {trail.walks.length}
           {trail.walks.length === 1 ? "walk" : "walks"}</span
         >
+        <div class="grow">
+          {
+            trail.data.completed && (
+              <div class="flex flex-nowrap items-center gap-3">
+                <span
+                  class={`text-sm font-medium whitespace-nowrap shrink-0 ${trail.percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
+                >
+                  {trail.percentComplete === 100 ? "Completed" : "In progress"}
+                </span>
+
+                <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden flex-1 min-w-0">
+                  <div
+                    class={`h-full transition-all duration-300 ${trail.percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
+                    style={`width: ${trail.percentComplete}%;`}
+                  />
+                </div>
+
+                <span class="text-sm text-slate-500 whitespace-nowrap shrink-0">
+                  {trail.percentComplete}% complete
+                </span>
+              </div>
+            )
+          }
+        </div>
       </div>
-      {
-        trail.data.completed && (
-          <div class="pt-4 flex flex-col max-w-md">
-            <span
-              class={`text-xs font-medium pb-2 ${trail.percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
-            >
-              {trail.percentComplete === 100 ? "Completed" : "In progress"}
-            </span>
-            <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-              <div
-                class={`h-full transition-all duration-300 ${trail.percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
-                style={`width: ${trail.percentComplete}%;`}
-              />
-            </div>
-            <span class="text-xs text-slate-600 pt-1">
-              {trail.percentComplete}% complete
-            </span>
-          </div>
-        )
-      }
-    </div>
-    <div class="hidden md:block">
-      <img
-        src={trail.cover.src as any}
-        alt=""
-        class="w-full aspect-4/3 object-cover rounded-lg"
-      />
     </div>
   </div>
   <div class="h-[400px] my-6">
