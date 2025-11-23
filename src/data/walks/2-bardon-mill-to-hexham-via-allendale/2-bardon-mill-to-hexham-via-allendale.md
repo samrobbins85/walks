@@ -1,7 +1,7 @@
 ---
 title: "Bardon Mill to Hexham via Allendale"
 description: "Walk in the north pennines"
-slug: "bardon-mill-to-hexham-via-allendale"
+slug: "2-bardon-mill-to-hexham-via-allendale"
 date: 2025-10-18
 tags:
   - "moor"
