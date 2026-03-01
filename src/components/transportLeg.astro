@@ -34,6 +34,15 @@ const { leg } = Astro.props;
         {leg.line}
       </span>
     </a>
+  ) : leg.crs_from && leg.crs_to ? (
+    <a href="#" data-crs-from={leg.crs_from} data-crs-to={leg.crs_to} target="_blank" rel="noopener noreferrer">
+      <span
+        class="px-2 py-0.5 rounded text-xs font-medium"
+        style={`background-color: ${leg.background}; color: ${leg.foreground};`}
+      >
+        {leg.line}
+      </span>
+    </a>
   ) : (
     <span
       class="px-2 py-0.5 rounded text-xs font-medium"
@@ -46,3 +55,31 @@ const { leg } = Astro.props;
     {leg.from} → {leg.to}
   </span>
 </div>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>("a[data-crs-from]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const origin = link.dataset.crsFrom;
+      const destination = link.dataset.crsTo;
+      const now = new Date();
+      now.setMinutes(now.getMinutes() + 1);
+      const roundedMin = Math.ceil(now.getMinutes() / 5) * 5;
+      if (roundedMin === 60) {
+        now.setHours(now.getHours() + 1);
+        now.setMinutes(0);
+      } else {
+        now.setMinutes(roundedMin);
+      }
+      const date = String(now.getDate()).padStart(2, "0")
+        + String(now.getMonth() + 1).padStart(2, "0")
+        + String(now.getFullYear()).slice(-2);
+      const hour = String(now.getHours()).padStart(2, "0");
+      const min = String(now.getMinutes()).padStart(2, "0");
+      window.open(
+        `https://www.nationalrail.co.uk/journey-planner/?type=single&origin=${origin}&destination=${destination}&leavingType=departing&leavingDate=${date}&leavingHour=${hour}&leavingMin=${min}&adults=1&extraTime=0#O`,
+        "_blank",
+      );
+    });
+  });
+</script>
