@@ -20,4 +20,30 @@ highlights:
     icon: "steam-locomotive"
   - name: "Allendale Town"
     icon: "lucide-lab:houses"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Haltwhistle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HWH"
+  return:
+    - mode: bus
+      line: "688"
+      from: "Allendale"
+      to: "Hexham"
+      operator: "Go North East"
+      noc: "GNEL"
+      url: "https://bustimes.org/services/688-hexham-allenheads"
+    - mode: train
+      line: "Northern"
+      from: "Hexham"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HEX"
+      crs_to: "NCL"
 ---

@@ -15,4 +15,14 @@ highlights:
     icon: "lucide:house"
   - name: "Aydon Castle"
     icon: "lucide:castle"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Corbridge"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "CBR"
 ---

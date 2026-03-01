@@ -23,4 +23,30 @@ highlights:
     icon: "proicons:beach"
   - name: "Bamburgh Castle"
     icon: "lucide:castle"
+transport:
+  outbound:
+    - mode: train
+      line: "LNER"
+      from: "Newcastle"
+      to: "Berwick-upon-Tweed"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "NCL"
+      crs_to: "BWK"
+  return:
+    - mode: bus
+      line: "918"
+      from: "Seahouses"
+      to: "Chathill"
+      operator: "Borders Buses"
+      noc: "BDRB"
+      url: "https://bustimes.org/services/0918-belford-craft-gallery-chathill-railway-statio"
+    - mode: train
+      line: "Northern"
+      from: "Chathill"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "CHT"
+      crs_to: "NCL"
 ---

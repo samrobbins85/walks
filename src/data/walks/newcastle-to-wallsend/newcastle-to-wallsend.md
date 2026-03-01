@@ -17,4 +17,12 @@ highlights:
     icon: "lucide:sailboat"
   - name: "Segedunum Roman Fort"
     icon: "roman"
+transport:
+  return:
+    - mode: metro
+      line: "Metro"
+      from: "Wallsend"
+      to: "Newcastle"
+      operator: "Nexus Tyne & Wear Metro"
+      noc: "TWMT-Y"
 ---

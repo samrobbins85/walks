@@ -26,4 +26,30 @@ highlights:
     icon: "lake"
   - name: "Haltwhistle burn"
     icon: "river2"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Hexham"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HEX"
+    - mode: bus
+      line: "680"
+      from: "Hexham"
+      to: "Bellingham"
+      operator: "Go North East"
+      noc: "GNEL"
+      url: "https://bustimes.org/services/680-hexham-bellingham"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Haltwhistle"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HWH"
+      crs_to: "NCL"
 ---

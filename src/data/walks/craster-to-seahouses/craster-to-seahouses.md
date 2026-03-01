@@ -19,4 +19,21 @@ highlights:
     icon: lucide:castle
   - name: Embleton Bay
     icon: proicons:beach
+transport:
+  outbound:
+    - mode: bus
+      line: "X18"
+      from: "Newcastle"
+      to: "Craster"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
+  return:
+    - mode: bus
+      line: "X18"
+      from: "Seahouses"
+      to: "Newcastle"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
 ---

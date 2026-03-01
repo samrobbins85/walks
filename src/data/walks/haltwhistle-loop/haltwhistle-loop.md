@@ -23,4 +23,23 @@ highlights:
     icon: "lake"
   - name: "Thirlwall Castle"
     icon: "lucide:castle"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Haltwhistle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HWH"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Haltwhistle"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HWH"
+      crs_to: "NCL"
 ---

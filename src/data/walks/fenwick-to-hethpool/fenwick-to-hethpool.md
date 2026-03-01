@@ -21,4 +21,21 @@ highlights:
     icon: "lucide:mountain"
   - name: "Hethpool Linn"
     icon: "game-icons:waterfall"
+transport:
+  outbound:
+    - mode: train
+      line: "LNER"
+      from: "Newcastle"
+      to: "Berwick-upon-Tweed"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "NCL"
+      crs_to: "BWK"
+    - mode: bus
+      line: "X18"
+      from: "Berwick-upon-Tweed"
+      to: "Fenwick"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
 ---

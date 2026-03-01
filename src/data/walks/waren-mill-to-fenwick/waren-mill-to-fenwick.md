@@ -12,4 +12,21 @@ trails:
 highlights:
   - name: "St Cuthbert's Cave"
     icon: "game-icons:cave-entrance"
+transport:
+  outbound:
+    - mode: bus
+      line: "X18"
+      from: "Newcastle"
+      to: "Waren Mill"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
+  return:
+    - mode: bus
+      line: "X18"
+      from: "Fenwick"
+      to: "Newcastle"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
 ---

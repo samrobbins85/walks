@@ -23,4 +23,23 @@ highlights:
     icon: "lucide:castle"
   - name: "Birdoswald Roman fort"
     icon: "roman"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Haltwhistle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HWH"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Carlisle"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "CAR"
+      crs_to: "NCL"
 ---

@@ -19,4 +19,21 @@ highlights:
     icon: "lucide-lab:houses"
   - name: "Craster"
     icon: "lucide:fish"
+transport:
+  outbound:
+    - mode: bus
+      line: "X18"
+      from: "Newcastle"
+      to: "Warkworth"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
+  return:
+    - mode: bus
+      line: "X18"
+      from: "Craster"
+      to: "Newcastle"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
 ---

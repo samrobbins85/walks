@@ -21,4 +21,23 @@ highlights:
     icon: "lake"
   - name: "Haltwhistle burn"
     icon: "river2"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Bardon Mill"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "BDM"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Haltwhistle"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HWH"
+      crs_to: "NCL"
 ---

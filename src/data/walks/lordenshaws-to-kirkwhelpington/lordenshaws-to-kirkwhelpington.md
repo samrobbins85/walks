@@ -13,4 +13,21 @@ trails:
 highlights:
   - name: "Harwood forest"
     icon: "lucide:trees"
+transport:
+  outbound:
+    - mode: bus
+      line: "X14"
+      from: "Newcastle"
+      to: "Rothbury"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x14-newcastle-to-morpeth"
+  return:
+    - mode: bus
+      line: "X74"
+      from: "Kirkwhelpington"
+      to: "Newcastle"
+      operator: "Peter Hogg of Jedburgh"
+      noc: "HOGG"
+      url: "https://bustimes.org/services/x74-newcastle-jedburgh"
 ---

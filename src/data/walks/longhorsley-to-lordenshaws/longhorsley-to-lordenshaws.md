@@ -13,4 +13,13 @@ highlights:
     icon: "lucide:church"
   - name: "Lordenshaws fort"
     icon: "mdi:spear"
+transport:
+  outbound:
+    - mode: bus
+      line: "X14"
+      from: "Newcastle"
+      to: "Longhorsley"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x14-newcastle-to-morpeth"
 ---

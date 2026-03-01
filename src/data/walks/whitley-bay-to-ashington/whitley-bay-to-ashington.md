@@ -15,4 +15,20 @@ highlights:
     icon: "mdi:lighthouse"
   - name: "Seaton Sluice Harbour"
     icon: "lucide:sailboat"
+transport:
+  outbound:
+    - mode: metro
+      line: "Metro"
+      from: "Newcastle"
+      to: "Whitley Bay"
+      operator: "Nexus Tyne & Wear Metro"
+      noc: "TWMT-Y"
+  return:
+    - mode: bus
+      line: "X21"
+      from: "Ashington"
+      to: "Newcastle"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x21-newcastle-to-ashington"
 ---

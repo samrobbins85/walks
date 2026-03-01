@@ -9,6 +9,8 @@ import "photoswipe/style.css";
 import FormattedDate from "../../components/common/FormattedDate.astro";
 import getImages from "../../utils/getImages";
 import { hoursToHM } from "../../utils/time";
+import TransportSection from "../../components/transportSection.astro";
+import { enrichTransportLegs } from "../../utils/transportEnrichment";
 
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
@@ -44,18 +46,23 @@ export async function getStaticPaths() {
           })
       );
 
+      const transport = walk.data.transport
+        ? enrichTransportLegs(walk.data.transport)
+        : null;
+
       return {
         params: { route: walk.data.slug },
         props: {
           walk: { ...walk, tags, trails, relatedLogs },
           geojsonData,
+          transport,
         },
       };
     })
   );
   return paths;
 }
-const { walk, geojsonData } = Astro.props;
+const { walk, geojsonData, transport } = Astro.props;
 const r2Images = await getImages(walk.data.slug);
 ---
 
@@ -175,6 +182,16 @@ const r2Images = await getImages(walk.data.slug);
             </a>
           ))}
         </div>
+      </div>
+    )
+  }
+  {
+    transport && (
+      <div class="mt-8">
+        <TransportSection
+          outbound={transport.outbound}
+          return={transport.return}
+        />
       </div>
     )
   }

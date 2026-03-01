@@ -15,4 +15,23 @@ highlights:
     icon: river2
   - name: Hathersage
     icon: lucide-lab:houses
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Sheffield"
+      to: "Bamford"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "SHF"
+      crs_to: "BAM"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Bamford"
+      to: "Sheffield"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "BAM"
+      crs_to: "SHF"
 ---

@@ -1,0 +1,83 @@
+{
+  "bus": {
+    "GNEL": {
+      "name": "Go North East",
+      "background": "#00A651",
+      "foreground": "#FFFFFF"
+    },
+    "ARRI": {
+      "name": "Arriva",
+      "background": "#00A3E0",
+      "foreground": "#FFFFFF"
+    },
+    "SCNE": {
+      "name": "Stagecoach",
+      "background": "#FF6600",
+      "foreground": "#FFFFFF"
+    },
+    "BDRB": {
+      "name": "Borders Buses",
+      "background": "#DF1E2B",
+      "foreground": "#FFFFFF"
+    },
+    "HOGG": {
+      "name": "Peter Hogg of Jedburgh",
+      "background": "#E62324",
+      "foreground": "#FFFFFF"
+    },
+    "GVTR": {
+      "name": "Glen Valley Tours",
+      "background": "#2E7D32",
+      "foreground": "#FFFFFF"
+    },
+    "TELF": {
+      "name": "Telford's Coaches",
+      "background": "#1565C0",
+      "foreground": "#FFFFFF"
+    }
+  },
+  "metro": {
+    "TWMT-Y": {
+      "name": "Tyne & Wear Metro (Yellow Line)",
+      "background": "#FEB300",
+      "foreground": "#000000"
+    },
+    "TWMT-G": {
+      "name": "Tyne & Wear Metro (Green Line)",
+      "background": "#1B873B",
+      "foreground": "#FFFFFF"
+    }
+  },
+  "train": {
+    "NT": {
+      "name": "Northern Trains",
+      "background": "#262262",
+      "foreground": "#FFFFFF"
+    },
+    "GR": {
+      "name": "LNER",
+      "background": "#CE0E2D",
+      "foreground": "#FFFFFF"
+    },
+    "TP": {
+      "name": "TransPennine Express",
+      "background": "#010385",
+      "foreground": "#FFFFFF"
+    },
+    "XC": {
+      "name": "CrossCountry",
+      "background": "#660033",
+      "foreground": "#FFFFFF"
+    },
+    "VT": {
+      "name": "Avanti West Coast",
+      "background": "#004354",
+      "foreground": "#FFFFFF"
+    },
+    "EM": {
+      "name": "East Midlands Railway",
+      "background": "#6B2856",
+      "foreground": "#FFFFFF"
+    }
+  }
+}

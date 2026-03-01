@@ -21,4 +21,22 @@ highlights:
     icon: lucide:sailboat
   - name: Druridge Bay
     icon: proicons:beach
+transport:
+  outbound:
+    - mode: train
+      line: "LNER"
+      from: "Newcastle"
+      to: "Alnmouth"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "NCL"
+      crs_to: "ALM"
+  return:
+    - mode: bus
+      line: "X21"
+      from: "Ashington"
+      to: "Newcastle"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x21-newcastle-to-ashington"
 ---

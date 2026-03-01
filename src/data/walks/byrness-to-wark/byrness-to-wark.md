@@ -17,4 +17,29 @@ highlights:
     icon: "lucide:tree-pine"
   - name: "Hindhope Linn"
     icon: "game-icons:waterfall"
+transport:
+  outbound:
+    - mode: bus
+      line: "X74"
+      from: "Newcastle"
+      to: "Byrness"
+      operator: "Peter Hogg of Jedburgh"
+      noc: "HOGG"
+      url: "https://bustimes.org/services/x74-newcastle-jedburgh"
+  return:
+    - mode: bus
+      line: "680"
+      from: "Wark"
+      to: "Hexham"
+      operator: "Go North East"
+      noc: "GNEL"
+      url: "https://bustimes.org/services/680-hexham-bellingham"
+    - mode: train
+      line: "Northern"
+      from: "Hexham"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HEX"
+      crs_to: "NCL"
 ---
