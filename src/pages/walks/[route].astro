@@ -11,6 +11,7 @@ import getImages from "../../utils/getImages";
 import { hoursToHM } from "../../utils/time";
 import TransportSection from "../../components/transportSection.astro";
 import { enrichTransportLegs } from "../../utils/transportEnrichment";
+import RoutePlanner from "../../components/RoutePlanner.svelte";
 
 export async function getStaticPaths() {
   const walks = await getCollection("walks");
@@ -50,19 +51,33 @@ export async function getStaticPaths() {
         ? enrichTransportLegs(walk.data.transport)
         : null;
 
+      // Extract start/end coordinates from GeoJSON for route planner
+      let startCoords: [number, number] | null = null;
+      let endCoords: [number, number] | null = null;
+      if (geojsonData) {
+        const features = (geojsonData as any).features;
+        if (features?.[0]?.geometry?.coordinates?.length) {
+          const coords = features[0].geometry.coordinates;
+          startCoords = coords[0] as [number, number];
+          endCoords = coords[coords.length - 1] as [number, number];
+        }
+      }
+
       return {
         params: { route: walk.data.slug },
         props: {
           walk: { ...walk, tags, trails, relatedLogs },
           geojsonData,
           transport,
+          startCoords,
+          endCoords,
         },
       };
     })
   );
   return paths;
 }
-const { walk, geojsonData, transport } = Astro.props;
+const { walk, geojsonData, transport, startCoords, endCoords } = Astro.props;
 const r2Images = await getImages(walk.data.slug);
 ---
 
@@ -193,6 +208,19 @@ const r2Images = await getImages(walk.data.slug);
           return={transport.return}
         />
       </div>
+    )
+  }
+  {
+    transport && startCoords && endCoords && (
+      <RoutePlanner
+        client:visible
+        walkDuration={walk.data.duration}
+        walkLength={walk.data.length}
+        startCoords={startCoords}
+        endCoords={endCoords}
+        outboundTransport={walk.data.transport?.outbound ?? []}
+        returnTransport={walk.data.transport?.return ?? []}
+      />
     )
   }
   <h2
