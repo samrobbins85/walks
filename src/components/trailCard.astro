@@ -2,9 +2,6 @@
 import { Icon } from "astro-icon/components";
 
 const { trail } = Astro.props;
-const percentComplete = Math.round(
-  (trail.data.completed / trail.data.length) * 100
-);
 ---
 
 <a
@@ -20,7 +17,7 @@ const percentComplete = Math.round(
     <div class="flex gap-x-4">
       <span class="flex items-center gap-x-2 text-sm text-slate-500">
         <Icon name="lucide:route" class="size-4" />
-        {trail.data.length}km</span
+        {trail.trailLength}km</span
       >
       <span class="flex items-center gap-x-2 text-sm text-slate-500">
         <Icon name="lucide:footprints" class="size-4" />
@@ -29,21 +26,21 @@ const percentComplete = Math.round(
       >
     </div>
     {
-      trail.data.completed && (
+      trail.completedDistance > 0 && (
         <div class="pt-4 flex flex-col">
           <span
-            class={`text-xs font-medium pb-2 ${percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
+            class={`text-xs font-medium pb-2 ${trail.percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
           >
-            {percentComplete === 100 ? "Completed" : "In progress"}
+            {trail.percentComplete === 100 ? "Completed" : "In progress"}
           </span>
           <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
             <div
-              class={`h-full transition-all duration-300 ${percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
-              style={`width: ${percentComplete}%;`}
+              class={`h-full transition-all duration-300 ${trail.percentComplete === 100 ? "bg-green-600" : "bg-sky-600"}`}
+              style={`width: ${trail.percentComplete}%;`}
             />
           </div>
           <span class="text-xs text-slate-600 pt-1">
-            {percentComplete}% complete
+            {trail.percentComplete}% complete
           </span>
         </div>
       )

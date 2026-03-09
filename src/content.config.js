@@ -66,8 +66,6 @@ const trails = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string(),
-    length: z.number(),
-    completed: z.number().optional(),
   }),
 });
 

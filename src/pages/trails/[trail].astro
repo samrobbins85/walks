@@ -4,176 +4,20 @@ import { getTrails } from "../../utils/getTrails";
 import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import WalkCard from "../../components/walkCard.astro";
-import fs from "node:fs/promises";
-import path from "node:path";
-import * as turf from "@turf/turf";
 import TrailMap from "../../components/trailMap.astro";
 
 export const getStaticPaths = (async () => {
   const sortedTrails = await getTrails();
 
   return sortedTrails.map((trail) => {
-    const percentComplete = Math.round(
-      (trail.data.completed / trail.data.length) * 100
-    );
-    const fileSlug = trail.filePath.split("/").at(-1).split(".")[0];
     return {
       params: { trail: trail.id },
-      props: { trail: { ...trail, percentComplete }, fileSlug },
+      props: { trail },
     };
   });
 }) satisfies GetStaticPaths;
 
-// function findOverlapsOnPath(
-//   completePathCollection,
-//   walksCollections,
-//   bufferKm = 1
-// ) {
-//   const completePath = completePathCollection.features[0];
-//   const mainCoords = completePath.geometry.coordinates;
-
-//   const covered = new Array(mainCoords.length).fill(false);
-
-//   walksCollections.forEach((walkCollection) => {
-//     walkCollection.features.forEach((walk) => {
-//       mainCoords.forEach((mainCoord, index) => {
-//         const mainPoint = turf.point(mainCoord);
-
-//         const isClose = walk.geometry.coordinates.some((walkCoord) => {
-//           const distance = turf.distance(mainPoint, turf.point(walkCoord), {
-//             units: "kilometers",
-//           });
-//           return distance < bufferKm;
-//         });
-
-//         if (isClose) {
-//           covered[index] = true;
-//         }
-//       });
-//     });
-//   });
-
-//   const overlaps = [];
-//   let currentSegment = [];
-
-//   mainCoords.forEach((coord, index) => {
-//     if (covered[index]) {
-//       currentSegment.push(coord);
-//     } else {
-//       if (currentSegment.length >= 2) {
-//         overlaps.push(turf.lineString(currentSegment));
-//       }
-//       currentSegment = [];
-//     }
-//   });
-
-//   if (currentSegment.length >= 2) {
-//     overlaps.push(turf.lineString(currentSegment));
-//   }
-
-//   return turf.featureCollection(overlaps);
-// }
-
-function findOverlapsOnPath(
-  completePathCollection,
-  walksCollections,
-  bufferKm = 1
-) {
-  // 1) Collect all walk coordinates from ALL walk collections
-  const allWalkCoords = [];
-  walksCollections.forEach((coll) => {
-    coll.features.forEach((f) => {
-      if (!f?.geometry) return;
-      const { type, coordinates } = f.geometry;
-      if (type === "LineString") {
-        allWalkCoords.push(...coordinates);
-      } else if (type === "MultiLineString") {
-        coordinates.forEach((line) => allWalkCoords.push(...line));
-      } else if (type === "Point") {
-        allWalkCoords.push(coordinates);
-      }
-    });
-  });
-
-  // Helper: ensure we always iterate arrays of lines
-  const asLines = (feature) => {
-    const { type, coordinates } = feature.geometry;
-    if (type === "LineString") return [coordinates];
-    if (type === "MultiLineString") return coordinates;
-    return []; // ignore other geom types
-  };
-
-  const overlaps = [];
-
-  // 2) For each path feature, compute covered points & extract contiguous segments
-  completePathCollection.features.forEach((mainFeature) => {
-    if (!mainFeature?.geometry) return;
-    const lines = asLines(mainFeature);
-    lines.forEach((lineCoords) => {
-      if (!Array.isArray(lineCoords) || lineCoords.length < 2) return;
-
-      const covered = new Array(lineCoords.length).fill(false);
-
-      lineCoords.forEach((mainCoord, i) => {
-        const mainPoint = turf.point(mainCoord);
-        // 3) Close to ANY walk coordinate?
-        const isClose = allWalkCoords.some((walkCoord) => {
-          const d = turf.distance(mainPoint, turf.point(walkCoord), {
-            units: "kilometers",
-          });
-          return d < bufferKm;
-        });
-        if (isClose) covered[i] = true;
-      });
-
-      // 4) Build overlap segments (contiguous covered coords)
-      let current = [];
-      lineCoords.forEach((coord, i) => {
-        if (covered[i]) {
-          current.push(coord);
-        } else if (current.length >= 2) {
-          overlaps.push(turf.lineString(current, mainFeature.properties || {}));
-          current = [];
-        } else {
-          current = [];
-        }
-      });
-      if (current.length >= 2) {
-        overlaps.push(turf.lineString(current, mainFeature.properties || {}));
-      }
-    });
-  });
-
-  return turf.featureCollection(overlaps);
-}
-
-const { trail, fileSlug } = Astro.props;
-const filePath = path.join(
-  process.cwd(),
-  "src",
-  "data",
-  "trails",
-  `${fileSlug}.json`
-);
-const fileContents = await fs.readFile(filePath, "utf-8");
-const geojsonData = JSON.parse(fileContents);
-
-const walkGeojsons = await Promise.all(
-  trail.walks.map(async (walk) => {
-    const walkFilePath = path.join(
-      process.cwd(),
-      "src",
-      "data",
-      "walks",
-      walk.data.slug,
-      "map.json"
-    );
-    const walkFileContents = await fs.readFile(walkFilePath, "utf-8");
-    return JSON.parse(walkFileContents);
-  })
-);
-
-const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
+const { trail } = Astro.props;
 ---
 
 <Layout title={trail.data.name} showCopyright>
@@ -184,7 +28,7 @@ const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
       <div class="flex gap-4 pt-2 w-full items-center flex-wrap">
         <span class="flex items-center gap-x-2 text-sm text-slate-500">
           <Icon name="lucide:route" class="size-4" />
-          {trail.data.length}km</span
+          {trail.trailLength}km</span
         >
         <span class="flex items-center gap-x-2 text-sm text-slate-500">
           <Icon name="lucide:footprints" class="size-4" />
@@ -193,7 +37,7 @@ const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
         >
         <div class="grow">
           {
-            trail.data.completed && (
+            trail.completedDistance > 0 && (
               <div class="flex flex-nowrap items-center gap-3">
                 <span
                   class={`text-sm font-medium whitespace-nowrap shrink-0 ${trail.percentComplete === 100 ? "text-green-600" : "text-sky-600"}`}
@@ -219,7 +63,7 @@ const overlap = findOverlapsOnPath(geojsonData, walkGeojsons);
     </div>
   </div>
   <div class="h-[400px] my-6">
-    <TrailMap trailRoute={geojsonData} completedRoute={overlap} />
+    <TrailMap trailRoute={trail.trailGeojson} completedRoute={trail.overlap} />
   </div>
   <div class="pt-4">
     <h2 class="text-2xl font-light mb-6">Walks</h2>
