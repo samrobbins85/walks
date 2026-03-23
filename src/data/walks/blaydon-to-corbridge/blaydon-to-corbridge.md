@@ -17,4 +17,23 @@ highlights:
     icon: "mdi:bridge"
   - name: "Broomleyhope wood"
     icon: "lucide:tree-pine"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Blaydon"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "BLO"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Corbridge"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "CBR"
+      crs_to: "NCL"
 ---

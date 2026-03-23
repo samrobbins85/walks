@@ -22,4 +22,23 @@ highlights:
     icon: "lucide:trees"
   - name: "Blanchland"
     icon: "lucide-lab:houses"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Hexham"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HEX"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Hexham"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HEX"
+      crs_to: "NCL"
 ---

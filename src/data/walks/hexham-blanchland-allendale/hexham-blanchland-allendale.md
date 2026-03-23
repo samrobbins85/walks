@@ -24,4 +24,30 @@ highlights:
     icon: "lucide-lab:houses"
   - name: "Hexham Common"
     icon: "lucide:bird"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Hexham"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HEX"
+  return:
+    - mode: bus
+      line: "688"
+      from: "Allendale"
+      to: "Hexham"
+      operator: "Go North East"
+      noc: "GNEL"
+      url: "https://bustimes.org/services/688-hexham-allenheads"
+    - mode: train
+      line: "Northern"
+      from: "Hexham"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HEX"
+      crs_to: "NCL"
 ---

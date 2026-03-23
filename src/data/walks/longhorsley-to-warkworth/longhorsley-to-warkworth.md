@@ -18,4 +18,21 @@ highlights:
     icon: "lucide:ice-cream-cone"
   - name: "Warkworth Castle"
     icon: "lucide:castle"
+transport:
+  outbound:
+    - mode: bus
+      line: "X14"
+      from: "Newcastle"
+      to: "Longhorsley"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x14-newcastle-to-morpeth"
+  return:
+    - mode: bus
+      line: "X18"
+      from: "Warkworth"
+      to: "Newcastle"
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x18-newcastle-to-morpeth"
 ---

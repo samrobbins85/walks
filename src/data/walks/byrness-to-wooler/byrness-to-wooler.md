@@ -19,4 +19,29 @@ highlights:
     icon: "lucide:mountain"
   - name: "Cheviot"
     icon: "lucide:mountain"
+transport:
+  outbound:
+    - mode: bus
+      line: "X74"
+      from: "Newcastle"
+      to: "Byrness"
+      operator: "Peter Hogg of Jedburgh"
+      noc: "HOGG"
+      url: "https://bustimes.org/services/x74-newcastle-jedburgh"
+  return:
+    - mode: bus
+      line: "267"
+      from: "Wooler"
+      to: "Berwick-upon-Tweed"
+      operator: "Borders Buses"
+      noc: "BDRB"
+      url: "https://bustimes.org/services/267-berwick-upon-tweed-wooler"
+    - mode: train
+      line: "LNER"
+      from: "Berwick-upon-Tweed"
+      to: "Newcastle"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "BWK"
+      crs_to: "NCL"
 ---

@@ -22,4 +22,23 @@ highlights:
     icon: "lake"
   - name: "Haltwhistle burn"
     icon: "river2"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Hexham"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HEX"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Haltwhistle"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HWH"
+      crs_to: "NCL"
 ---

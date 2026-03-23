@@ -18,4 +18,19 @@ highlights:
     icon: "lucide:church"
   - name: "Segedunum Roman Fort"
     icon: "roman"
+transport:
+  outbound:
+    - mode: metro
+      line: "Metro"
+      from: "Newcastle"
+      to: "Whitley Bay"
+      operator: "Nexus Tyne & Wear Metro"
+      noc: "TWMT-Y"
+  return:
+    - mode: metro
+      line: "Metro"
+      from: "Wallsend"
+      to: "Newcastle"
+      operator: "Nexus Tyne & Wear Metro"
+      noc: "TWMT-Y"
 ---

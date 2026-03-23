@@ -18,4 +18,22 @@ highlights:
     icon: "lucide-lab:houses"
   - name: "St Oswald's Church"
     icon: "lucide:church"
+transport:
+  outbound:
+    - mode: bus
+      line: "X74"
+      from: "Newcastle"
+      to: "Kirkwhelpington"
+      operator: "Peter Hogg of Jedburgh"
+      noc: "HOGG"
+      url: "https://bustimes.org/services/x74-newcastle-jedburgh"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Hexham"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HEX"
+      crs_to: "NCL"
 ---

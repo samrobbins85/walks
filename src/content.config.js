@@ -2,6 +2,18 @@ import { defineCollection, reference, z } from "astro:content";
 
 import { glob } from "astro/loaders";
 
+const transportLeg = z.object({
+  mode: z.enum(["train", "bus", "metro"]),
+  line: z.string(),
+  from: z.string(),
+  to: z.string(),
+  operator: z.string(),
+  noc: z.string().optional(),
+  crs_from: z.string().optional(),
+  crs_to: z.string().optional(),
+  url: z.string().optional(),
+});
+
 const walks = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/walks" }),
   schema: z.object({
@@ -18,6 +30,12 @@ const walks = defineCollection({
       .array(z.object({ name: z.string(), icon: z.string() }))
       .optional(),
     peaks: z.array(reference("peaks")).optional(),
+    transport: z
+      .object({
+        outbound: z.array(transportLeg).optional(),
+        return: z.array(transportLeg).optional(),
+      })
+      .optional(),
   }),
 });
 
@@ -48,8 +66,6 @@ const trails = defineCollection({
   schema: z.object({
     name: z.string(),
     description: z.string(),
-    length: z.number(),
-    completed: z.number().optional(),
   }),
 });
 
