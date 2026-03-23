@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -18,13 +17,11 @@ export default defineConfig({
   },
   site: "https://walks.samrobbins.uk",
   integrations: [icon(), alpinejs(), sitemap(), svelte()],
-  experimental: {
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: "Inter",
-        cssVariable: "--font-inter",
-      },
-    ],
-  },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "Inter",
+      cssVariable: "--font-inter",
+    },
+  ],
 });
