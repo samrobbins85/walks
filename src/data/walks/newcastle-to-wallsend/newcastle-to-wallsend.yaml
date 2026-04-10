@@ -1,0 +1,26 @@
+title: "Newcastle to Wallsend"
+description: "Walk to the end of Hadrian's wall"
+slug: "newcastle-to-wallsend"
+date: 2024-11-04
+tags:
+  - "history"
+  - "river"
+length: 9.68
+duration: 1.5
+elevation: 8
+trails:
+  - "hadrians-wall"
+  - "river-tyne-trail"
+highlights:
+  - name: "St Peter's Basin"
+    icon: "lucide:sailboat"
+  - name: "Segedunum Roman Fort"
+    icon: "roman"
+transport:
+  return:
+    - mode: metro
+      line: "Metro"
+      from: "Wallsend"
+      to: "Newcastle"
+      operator: "Nexus Tyne & Wear Metro"
+      noc: "TWMT-Y"

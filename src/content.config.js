@@ -15,7 +15,7 @@ const transportLeg = z.object({
 });
 
 const walks = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/walks" }),
+  loader: glob({ pattern: "**/*.yaml", base: "./src/data/walks" }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),

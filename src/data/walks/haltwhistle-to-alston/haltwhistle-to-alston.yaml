@@ -1,0 +1,45 @@
+title: "Haltwhistle to Alston"
+description: "Walk in South Tynedale"
+slug: "haltwhistle-to-alston"
+date: 2024-08-03
+tags:
+  - "river"
+length: 21.5
+duration: 4
+elevation: 282
+trails:
+  - "south-tyne-trail"
+  - "river-tyne-trail"
+highlights:
+  - name: "Alston Arches"
+    icon: "mdi:bridge"
+  - name: "Lambley Viaduct"
+    icon: "mdi:bridge"
+  - name: "South Tynedale Railway"
+    icon: "steam-locomotive"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Haltwhistle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HWH"
+  return:
+    - mode: bus
+      line: "681"
+      from: "Alston"
+      to: "Haltwhistle"
+      operator: "Go North East"
+      noc: "GNEL"
+      url: "https://bustimes.org/services/681-alston-haltwhistle"
+    - mode: train
+      line: "Northern"
+      from: "Haltwhistle"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HWH"
+      crs_to: "NCL"
