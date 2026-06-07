@@ -1,0 +1,22 @@
+title: "Alnmouth to Rothbury"
+description: "Walk along St Oswald's Way"
+slug: "alnmouth-to-rothbury"
+date: 2026-05-23
+length: 38.2
+duration: 7.5
+elevation: 554
+tags:
+  - "coast"
+  - "river"
+trails:
+  - "england-coast-path"
+  - "st-oswalds-way"
+highlights:
+  - name: "Warkworth Castle"
+    icon: "lucide:castle"
+  - name: "Felton"
+    icon: "lucide-lab:houses"
+  - name: "River Coquet"
+    icon: "river2"
+  - name: "Rothbury"
+    icon: "lucide-lab:houses"
