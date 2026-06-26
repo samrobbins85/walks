@@ -1,0 +1,46 @@
+title: "Alnmouth to Seahouses"
+description: "Walk along the Northumberland coast"
+slug: "alnmouth-to-seahouses"
+date: 2026-06-20
+length: 32
+duration: 6.4
+elevation: 264
+tags:
+  - "coast"
+trails:
+  - "england-coast-path"
+  - "st-oswalds-way"
+highlights:
+  - name: "Alnmouth"
+    icon: "lucide-lab:houses"
+  - name: "Craster"
+    icon: "lucide:fish"
+  - name: "Dunstanburgh Castle"
+    icon: "lucide:castle"
+  - name: "Embleton Bay"
+    icon: "lucide-lab:beach-ball"
+transport:
+  outbound:
+    - mode: train
+      line: "LNER"
+      from: "Newcastle"
+      to: "Alnmouth"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "NCL"
+      crs_to: "ALM"
+  return:
+    - mode: bus
+      line: "X18"
+      from: "Seahouses"
+      to: "Berwick"
+      operator: "Arriva"
+      noc: "ARRI"
+    - mode: train
+      line: "TransPennine Express"
+      from: "Berwick-Upon-Tweed"
+      to: "Newcastle"
+      operator: "TransPennine Express"
+      noc: "TP"
+      crs_from: "BWK"
+      crs_to: "NCL"
