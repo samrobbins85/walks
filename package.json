@@ -26,7 +26,7 @@
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
     "d3-time": "^3.1.0",
-    "layerchart": "2.0.0-next.46",
+    "layerchart": "2.0.0-next.65",
     "leaflet": "^1.9.4",
     "photoswipe": "^5.4.4",
     "react": "^19.1.0",

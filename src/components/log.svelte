@@ -212,7 +212,7 @@
             yDomain={[0, null]}
             yNice={4}
             padding={{ top: 20, left: 40, right: 20, bottom: 20 }}
-            tooltip={{
+            tooltipContext={{
               mode: "band",
               touchEvents: "auto",
             }}
