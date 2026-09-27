@@ -1,0 +1,38 @@
+title: "Hexham to Consett"
+description: "Walk along the way of light"
+slug: "hexham-to-consett"
+date: 2026-09-26
+length: 42.7
+duration: 8
+elevation: 1161
+tags:
+  - "hills"
+  - "moor"
+  - "history"
+trails:
+  - "the-way-of-light"
+highlights:
+  - name: "Hexham abbey"
+    icon: "lucide:church"
+  - name: "Blanchland abbey"
+    icon: "lucide:church"
+  - name: "Devil's water"
+    icon: "river2"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Hexham"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "HEX"
+  return:
+    - mode: bus
+      line: "X45"
+      from: "Consett"
+      to: "Newcastle"
+      operator: "Go North East"
+      noc: "GNEL"
+      url: "https://bustimes.org/services/x45-consett-newcastle-via-blackhill-shotley-bridge"
