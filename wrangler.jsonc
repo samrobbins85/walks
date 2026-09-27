@@ -1,7 +1,18 @@
 {
   "name": "walks",
+  "main": "worker/index.ts",
   "compatibility_date": "2025-10-03",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "r2_buckets": [
+    { "binding": "BUCKET", "bucket_name": "walk-pictures" }
+  ],
+  "vars": {
+    "ALLOWED_GH_LOGIN": "samrobbins85",
+    // Public OAuth app client ID; the matching GITHUB_CLIENT_SECRET is a
+    // Worker secret set in the dashboard, not stored here.
+    "GITHUB_CLIENT_ID": "Ov23liVNl3o8g2oThuoN"
   }
 }
