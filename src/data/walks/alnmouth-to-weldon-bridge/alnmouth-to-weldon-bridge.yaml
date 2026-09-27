@@ -1,0 +1,39 @@
+title: "Alnmouth to Weldon Bridge"
+description: "Walk along the coquet"
+slug: "alnmouth-to-weldon-bridge"
+date: 2026-09-11
+length: 27.4
+duration: 5.5
+elevation: 363
+tags:
+  - "coast"
+  - "river"
+  - "history"
+trails:
+  - "st-oswalds-way"
+  - "england-coast-path"
+highlights:
+  - name: "Warkworth castle"
+    icon: "lucide:castle"
+  - name: "Morwick ice cream"
+    icon: "lucide:ice-cream-cone"
+  - name: "Felton"
+    icon: "lucide-lab:houses"
+transport:
+  outbound:
+    - mode: train
+      line: "TransPennine Express"
+      from: "Newcastle"
+      to: "Alnmouth"
+      operator: "TransPennine Express"
+      noc: "TP"
+      crs_from: "NCL"
+      crs_to: "ALM"
+  return:
+    - mode: bus
+      line: "X14"
+      from: "Weldon Bridge"
+      to: "Newcastle "
+      operator: "Arriva"
+      noc: "ARRI"
+      url: "https://bustimes.org/services/x14-thropton-newcastle-city-centre-2"

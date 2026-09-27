@@ -1,0 +1,39 @@
+title: "Corbridge to Bardon Mill"
+description: "Walk along Hadrian's wall"
+slug: "corbridge-to-bardon-mill"
+date: 2026-09-20
+length: 37.3
+duration: 7
+elevation: 862
+tags:
+  - "history"
+trails:
+  - "hadrians-wall"
+highlights:
+  - name: "Hadrian's Wall"
+    icon: "lucide:brick-wall"
+  - name: "St Oswald's Church"
+    icon: "lucide:church"
+  - name: "Housesteads fort"
+    icon: "roman2"
+  - name: "Aydon Castle"
+    icon: "lucide:castle"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Corbridge"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "CRB"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Bardon Mill"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "BLL"
+      crs_to: "NCL"
