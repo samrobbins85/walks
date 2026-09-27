@@ -31,8 +31,13 @@ const UPLOAD_PREFIX = "/api/upload/";
 // One path segment for the walk slug, one for the filename, .webp only.
 const KEY_PATTERN = /^[A-Za-z0-9-]+\/[^/]+\.webp$/;
 
-async function isAllowedUser(token: string, env: Env): Promise<boolean> {
-  if (!token) return false;
+// Returns null when the token is valid for this app and the allowed user;
+// otherwise a short reason safe to expose to the caller (no secrets).
+async function checkAuth(token: string, env: Env): Promise<string | null> {
+  if (!token) return "no token";
+  if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
+    return "worker missing GitHub app credentials";
+  }
   // https://docs.github.com/en/rest/apps/oauth-applications#check-a-token
   // Authenticated with the app's own credentials, this 404s for any token
   // that wasn't issued to this OAuth app — unlike /user, which accepts a
@@ -51,9 +56,16 @@ async function isAllowedUser(token: string, env: Env): Promise<boolean> {
       body: JSON.stringify({ access_token: token }),
     },
   );
-  if (!res.ok) return false;
+  // 401 = our client id/secret pair is wrong; 404 = token not minted by
+  // this OAuth app (or revoked/expired).
+  if (res.status === 401) return "app credentials rejected by GitHub";
+  if (res.status === 404) return "token not issued by this app";
+  if (!res.ok) return `token check failed (github ${res.status})`;
   const check = (await res.json()) as { user?: { login?: string } };
-  return check.user?.login?.toLowerCase() === env.ALLOWED_GH_LOGIN.toLowerCase();
+  if (check.user?.login?.toLowerCase() !== env.ALLOWED_GH_LOGIN.toLowerCase()) {
+    return "user not allowed";
+  }
+  return null;
 }
 
 async function handleUpload(
@@ -69,8 +81,9 @@ async function handleUpload(
     /^Bearer\s+/i,
     "",
   );
-  if (!(await isAllowedUser(token, env))) {
-    return new Response("Unauthorized", { status: 401 });
+  const authError = await checkAuth(token, env);
+  if (authError) {
+    return new Response(`Unauthorized: ${authError}`, { status: 401 });
   }
 
   if (request.headers.get("Content-Type") !== "image/webp") {
