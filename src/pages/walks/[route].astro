@@ -23,15 +23,15 @@ export async function getStaticPaths() {
         ? await getEntries(walk.data.trails)
         : [];
 
-      const lastSlashIndex = walk.filePath.lastIndexOf("/");
+      const lastSlashIndex = walk.filePath?.lastIndexOf("/");
 
-      const directoryPath = walk.filePath.slice(0, lastSlashIndex);
+      const directoryPath = walk.filePath?.slice(0, lastSlashIndex);
       const geojsonMatches = import.meta.glob("/src/data/walks/**/*.json", {
         eager: true,
       }) as Record<string, { default: object }>;
 
-      const geojsonEntry = Object.entries(geojsonMatches).find(([path]) =>
-        path.includes(directoryPath)
+      const geojsonEntry = Object.entries(geojsonMatches).find(
+        ([path]) => directoryPath && path.includes(directoryPath),
       );
 
       const geojsonData: object | null = geojsonEntry
@@ -43,7 +43,7 @@ export async function getStaticPaths() {
           .map(async (log) => {
             const weather = await getEntry(log.data.weather);
             return { ...log, data: { ...log.data, weather } };
-          })
+          }),
       );
 
       const transport = walk.data.transport
@@ -58,7 +58,7 @@ export async function getStaticPaths() {
           transport,
         },
       };
-    })
+    }),
   );
   return paths;
 }
@@ -100,7 +100,7 @@ const r2Images = await getImages(walk.data.slug);
             </div>
             <div class="flex items-center gap-x-2">
               <Icon name="lucide:clock" class="size-4" />
-              {roundToQuarter(walk.data.duration)} h
+              {roundToQuarter(walk.data.duration)}h
             </div>
             <div class="flex items-center gap-x-2">
               <Icon name="lucide:calendar-days" class="size-4" />
