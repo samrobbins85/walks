@@ -1,0 +1,36 @@
+title: "Riding Mill to Hexham via Slaley"
+description: "Walk south of the tyne"
+slug: "riding-mill-to-hexham-via-slaley"
+date: 2026-07-18
+length: 22.2
+duration: 4.4
+elevation: 531
+tags:
+  - "moor"
+  - "forest"
+trails:
+  - "a-pennine-journey"
+highlights:
+  - name: "Slaley"
+    icon: "lucide-lab:houses"
+  - name: "Devil's water"
+    icon: "river2"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Riding Mill"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "RDM"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Hexham"
+      to: "Newcastle"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "HEX"
+      crs_to: "NCL"
