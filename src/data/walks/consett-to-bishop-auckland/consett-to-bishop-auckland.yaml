@@ -1,0 +1,44 @@
+title: "Consett to Bishop Auckland"
+description: "Walk in County Durham"
+slug: "consett-to-bishop-auckland"
+date: 2026-10-03
+length: 41.2
+duration: 8
+elevation: 635
+tags:
+  - "forest"
+  - "moor"
+  - "river"
+  - "lake"
+highlights:
+  - name: "Tunstall reservoir"
+    icon: "lake"
+  - name: "Wolsingham"
+    icon: "lucide-lab:houses"
+  - name: "River wear"
+    icon: "river2"
+transport:
+  outbound:
+    - mode: bus
+      line: "X45"
+      from: "Newcastle "
+      to: "Consett"
+      operator: "Go North East"
+      noc: "GNEL"
+  return:
+    - mode: train
+      line: "Northern"
+      from: "Bishop Auckland"
+      to: "Darlington"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "BIA"
+      crs_to: "DAR"
+    - mode: train
+      line: "LNER"
+      from: "Darlington"
+      to: "Newcastle"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "DAR"
+      crs_to: "NCL"
