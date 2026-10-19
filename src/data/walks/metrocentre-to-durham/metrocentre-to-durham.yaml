@@ -1,0 +1,35 @@
+title: "Metrocentre to Durham"
+description: "Walk along disused railways"
+slug: "metrocentre-to-durham"
+date: 2026-10-16
+length: 43.2
+duration: 8
+elevation: 478
+tags:
+  - "forest"
+trails:
+  - "the-way-of-light"
+highlights:
+  - name: "Gibside"
+    icon: "lucide-lab:house-manor"
+  - name: "Durham Cathedral"
+    icon: "lucide:church"
+transport:
+  outbound:
+    - mode: train
+      line: "Northern"
+      from: "Newcastle"
+      to: "Metrocentre"
+      operator: "Northern Trains"
+      noc: "NT"
+      crs_from: "NCL"
+      crs_to: "MCE"
+  return:
+    - mode: train
+      line: "LNER"
+      from: "Durham"
+      to: "Newcastle"
+      operator: "LNER"
+      noc: "GR"
+      crs_from: "DHM"
+      crs_to: "NCL"
