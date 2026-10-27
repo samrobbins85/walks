@@ -1,6 +1,6 @@
 # Walks
 
-A website for tracking walks I've done
+A website for tracking walks I've done, available at https://walks.samrobbins.uk
 
 ## Environment variables
 
