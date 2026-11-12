@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/alpinejs": "^1.0.0",
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/svelte": "^9.0.1",
+    "@astrojs/svelte": "^9.1.2",
     "@aws-sdk/client-s3": "^3.995.0",
     "@cloudflare/workers-types": "^5.20260927.1",
     "@layerstack/utils": "^1.0.1",
